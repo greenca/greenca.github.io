@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Cristina Green</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Cristina Green </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/category/computer.html">Computer</a></li>
+                    <li><a href="/category/math.html">Math</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/mathematical-curio.html">Mathematical Curio</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-01-26T00:00:00-08:00">
+                Published: Mon 26 January 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/math.html">Math</a>. </p>
+
+</footer><!-- /.post-info --><p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
+<p>For example:</p>
+<div class="highlight"><pre>number = 12345
+rearranged = 43215
+difference = 43215 - 12345 = 30870
+difference / 9 = 3430
+</pre></div>
+
+
+<p>More generally, you can do the same with numbers in any base, and the resulting difference will be divisible by one less than the base.</p>
+<p>For example:</p>
+<div class="highlight"><pre>number in base 8: o12345 (= 5349 in decimal)
+rearrange = o43215 (= 18061 in decimal)
+difference = o43215 - o12345 = o30650 (= 12712 in decimal)
+difference / 7 = 1816 (decimal)
+</pre></div>
+
+
+<p>We can prove that this holds generally, not just is specially chosen examples.</p>
+<p>Let <span class="math">\(b\)</span> be the base of the numbers we're considering, and let <span class="math">\(n\)</span> be the number of digits. Then the original number, <span class="math">\(x\)</span>, is defined as
+</p>
+<div class="math">$$ x = \sum_{i=0}^n a_i b^i $$</div>
+<p>
+where <span class="math">\(a_i\)</span> are the digits of <span class="math">\(x\)</span>.</p>
+<p>When we rearrange the digits of <span class="math">\(x\)</span>, let <span class="math">\(j(i)\)</span> denote the new position of the digit originally at position <span class="math">\(i\)</span>. Then the rearranged number, <span class="math">\(y\)</span>, is
+</p>
+<div class="math">$$ y = \sum_{i=0}^n a_i b^{j(i)} $$</div>
+<p>Then the difference is
+</p>
+<div class="math">$$ x - y = \sum_{i=0}^n a_i [b^i - b^{j(i)}] $$</div>
+<p>Each term in the series is a constant times <span class="math">\(b^n - b^m\)</span> for some <span class="math">\(n &gt; m\)</span>. [Note: if <span class="math">\(i &lt; j(i)\)</span>, then the constant is <span class="math">\(-a_i\)</span>.]</p>
+<div class="math">$$b^n - b^m = b^m(b^{n-m} - 1)$$</div>
+<p>And <span class="math">\(b-1\)</span> is a factor of <span class="math">\(b^N - 1\)</span> for any natural number <span class="math">\(N\)</span>. Thus, <span class="math">\(x-y\)</span> is divisible by <span class="math">\(b-1\)</span>, i.e. one less than the base of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>.</p>
+<h3>Mathematical "Magic"</h3>
+<p>This is the basis of a mathematical magic trick (the origins of which I don't know). In it, the magician gives the following instructions to the audience:</p>
+<ol>
+<li>Write down a four digit number</li>
+<li>Underneath is, rearrange the digits of the number however you like, to form another four digit number.</li>
+<li>Subtract the smaller number from the larger.</li>
+<li>Circle a non-zero digit of the result.</li>
+<li>Tell me the other digits of the result.</li>
+</ol>
+<p>The magician will then tell the audience what the circled digit is.</p>
+<p>This works because, as we established, the difference will always be divisible by nine. And thus the sum of the digits will also be a multiple of nine. So the magician needs only to sum up the other digits, and subtract it from the next bigger multiple of nine. (This is why it has to be a non-zero digit that is circled: otherwise you wouldn't be able to tell if it was a zero or a nine.)</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/avoiding-repetitive-methods.html" rel="bookmark"
+                           title="Permalink to Avoiding Repetitive Methods">Avoiding Repetitive Methods</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-01-20T00:00:00-08:00">
+                Published: Tue 20 January 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name ...</p>
+                <a class="readmore" href="/avoiding-repetitive-methods.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/default-arguments-in-python.html" rel="bookmark"
+                           title="Permalink to Default Arguments in Python">Default Arguments in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-12-17T00:00:00-08:00">
+                Published: Wed 17 December 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>In Python, you can assign a default value to an optional varible like so:</p>
+<div class="highlight"><pre><span class="n">def</span> <span class="n">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">print</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+
+
+<p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
+<p>This is all perfectly straightforward ...</p>
+                <a class="readmore" href="/default-arguments-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/uploading-files-using-twisted-web.html" rel="bookmark"
+                           title="Permalink to Uploading files using Twisted Web">Uploading files using Twisted Web</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-07-05T00:00:00-07:00">
+                Published: Thu 05 July 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
+</footer><!-- /.post-info -->                <p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
+<div class="highlight"><pre><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args ...</span></pre></div>
+                <a class="readmore" href="/uploading-files-using-twisted-web.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

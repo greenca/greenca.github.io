@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Uploading files using Twisted Web</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Cristina Green </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li class="active"><a href="/category/computer.html">Computer</a></li>
+                    <li><a href="/category/math.html">Math</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/uploading-files-using-twisted-web.html" rel="bookmark"
+           title="Permalink to Uploading files using Twisted Web">Uploading files using Twisted Web</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-07-05T00:00:00-07:00">
+                Published: Thu 05 July 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
+</footer><!-- /.post-info -->      <p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
+<div class="highlight"><pre><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;email&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>(Note that the variable used to store these values does not need to be the same as the name of the input element in the form.)</p>
+<p>Now, if you want to include a file input, rather than simpler forms (text boxes, drop-down lists, etc.), this can be easily added to the form:</p>
+<div class="highlight"><pre> <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;filename&quot;</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>This form element will insert a button, that allows the user to browse for and select a file. However, if we access it as before, we end up just with the name of the file the user input, rather than its contents. Which is, obviously, of limited use.</p>
+<p>Now, I looked at all the fields listed in the Request API, and didn't see anything relating to the file, other than its name. This was curious, as clearly the file contents would have to be transmitted somehow.</p>
+<p>Googling the issue turned up a <a href="http://stackoverflow.com/questions/3275081/am-i-parsing-this-http-post-request-properly/9810738#9810738" target="_blank">solution</a> using <code>cgi.FieldStorage</code>:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">render_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getAllHeaders</span><span class="p">()</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cgi</span><span class="o">.</span><span class="n">FieldStorage</span><span class="p">(</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+    <span class="n">environ</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">:</span><span class="s">&#39;POST&#39;</span><span class="p">,</span>
+    <span class="s">&#39;CONTENT_TYPE&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;content-type&#39;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">print</span> <span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+    <span class="k">print</span> <span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="s">&quot;upl_file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/tests&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&#39;&#39;</span>
+</pre></div>
+
+
+<p><code>cgi.FieldStorage</code> does appear to be useful for processing html forms; however, the documentation online doesn't appear to cover how to initialize it from an existing request. The above example is all I had to go on.</p>
+<p>The FieldStorage constructor optionally takes an argument fp, the file pointer. By default this is <code>sys.stdin</code> (which is what the documented examples appear to use). The example above passes in request.content as the file pointer. This is a bit troubling, as request.content appears to be a string containing the different input field values, with just the file name for the file input field. Nonetheless, maybe there's some magic to the file pointer, that will allow FieldStorage to see contents that I can't.</p>
+<p>When trying the code above, <code>img["upl_file"].name</code> contains the name of the field (i.e. "upl_file"), <code>img["upl_file"].filename</code> and <code>img["upl_file"].type</code> both have values of <code>None</code>, and <code>img["upl_file"].value</code> contains the name of the file input by the user. The output code fails entirely, as it attempts to open a file with a name of <code>None</code>. And even if it were adjusted, the contents of that file would be only the name of the user's file, rather than the file's contents.</p>
+<p>Now, this was the only example I could find that used <code>cgi.FieldStorage</code> to upload files under Twisted.web. I did, however, find a couple others that solved the problem using Twisted.web2. I would prefer not to use these, I they would involve installing a new web framework, but I did take a look at them to see if I could figure out where the file contents might be hiding. One of the examples included not just the request handling code, but also the html code for the form itself. Which is where I found the important missing component.</p>
+<p>Rather than declare the form as</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>I should have been including an enctype attribute:</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>The default value for enctype is <code>application/x-www-form-urlencoded</code>, which, as far as I can tell, is stripping the file contents from the request.</p>
+<p>With this attribute set to <code>multipart/form-data</code>, the code snippet above works correctly. <code>img["upl_file"].filename</code> now contains the name of the user's file, and <code>img["upl_file"].value</code> contains the file's contents. The code needs only to be modified to check that a file has been input (if not if currently fails), and it will save a copy of the user's file on the server, as we require. </p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

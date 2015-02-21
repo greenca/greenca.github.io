@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Default Arguments in Python</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Cristina Green </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li class="active"><a href="/category/computer.html">Computer</a></li>
+                    <li><a href="/category/math.html">Math</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/default-arguments-in-python.html" rel="bookmark"
+           title="Permalink to Default Arguments in Python">Default Arguments in Python</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-12-17T00:00:00-08:00">
+                Published: Wed 17 December 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->      <p>In Python, you can assign a default value to an optional varible like so:</p>
+<div class="highlight"><pre><span class="n">def</span> <span class="n">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">print</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+
+
+<p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
+<p>This is all perfectly straightforward and works just a you would expect, no matter what you put in the body of the function.</p>
+<p>Suppose, however, that instead of integers, we want to do something with lists:</p>
+<div class="highlight"><pre><span class="n">def</span> <span class="n">listFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span>
+    <span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">print</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>The difference here is that lists are mutable. So if we call this function with two arguments, the list we pass as <code>y</code> will be changed:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;</span> <span class="n">a</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+
+
+<p>And that's fine. If we write a function like this, it's because we want to change a mutable variable. The problem arises with the default value. Because the default variable is only evaluated once, when the function is defined, it will also be changed by the code:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+
+<p>And this is probably behaviour that we don't want. Now the default value of the variable depends on how many times the function has been called (and with which other variables). Unlike the case where we called the function with two variables, we also can't discard the modified list after using it: it will always hang around, and be accessed whenever that function is called again.</p>
+<p>Obviously, you shouldn't modify a mutable default value like this. But a better practice is to not use mutable values as default values in the first place, so that the default value will stay the same, no matter what crazy thing you might do in the body of the function.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
