@@ -22,7 +22,34 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/avoiding-repetitive-methods.html">Avoiding Repetitive Methods</a></h1>
+                    <h1 class="entry-title"><a href="/julia.html">Julia</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-02-25T00:00:00-08:00">
+                Published: Wed 25 February 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/julia.html">julia</a> </p>
+</footer><!-- /.post-info --><p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another language, with it's own special data structures, rather than people able to do serious computation on regular Python data structures. And the NumPy structures feel weird and non-intuitive to me, especially when dealing with vector calculations -- all the operators default to element-wise!</p>
+<p>So, I was pretty excited about Julia. The data structures and operators are similar to Matlab, but it's open-source, and much faster! Which isn't a minor thing, since prototyping in Matlab was easy, but it was unuseably slow for any big calculations.</p>
+<p>However, every time I've tried to actually use Julia for anything other than the simplest task, I've run into problems. Libraries that just won't install. Inexplicable errors that eventually all trace back to some massive change to the language (no matter how recently the tutorial, or whatnot, was written). And, so, I just can't do it. I'm spending way too much time trying to translate code from Julia-of-two-months-ago to Julia-of-today. And even if I succeed, will it still run two months from now?</p>
+<p>I'm still excited about the posibilities of Julia, but it's jut too unstable to use for anything real right now. I'll be sticking with NumPy for now, but I'll probably try Julia again once it stabilizes.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/avoiding-repetitive-methods.html" rel="bookmark"
+                           title="Permalink to Avoiding Repetitive Methods">Avoiding Repetitive Methods</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-01-20T00:00:00-08:00">
                 Published: Tue 20 January 2015
@@ -33,109 +60,10 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>. </p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info --><p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name, but almost identical behaviour (just differing by a constant, say)?</p>
-<p>As a really dumb example:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="nf">function_a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;a&#39;</span>
-
-    <span class="k">def</span> <span class="nf">function_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;b&#39;</span>
-
-    <span class="k">def</span> <span class="nf">function_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;c&#39;</span>
-
-    <span class="o">...</span>
-</pre></div>
-
-
-<p>[Obviously, you wouldn't really have methods quite this simple, but this is just a simplified version of any case where the method name provides a constant for some sort of calculation.]</p>
-<p>In our example case, you should be able to call the methods as follows:</p>
-<div class="highlight"><pre>&gt;&gt; a = A()
-
-&gt;&gt; a.function_a()
-&#39;a&#39;
-
-&gt;&gt; a.function_b()
-&#39;b&#39;
-
-&gt;&gt; a.function_c()
-&#39;c&#39;
-
-...
-</pre></div>
-
-
-<p>It all works fine as defined above, but we could have potentially dozens of methods that all do basically the same thing. What we really want here is a way to say, "If we call a method named 'function_' followed by some character, return that character."</p>
-<p>Luckily, we can do this by defining <code>__getattr__</code> for the class. The class method names are treats as attributes, like any other. And <code>__getattr__</code> will be called for any undefined attributes.</p>
-<p>Naively, we might try something like this:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;function_&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">attr</span><span class="p">[</span><span class="mi">9</span><span class="p">:]</span>
-</pre></div>
-
-
-<p>But this doesn't quite do what we want. This would be fine if we wanted to have a bunch of class variables named <code>function_a</code>, <code>function_b</code>, etc. But we actually wanted class methods. The difference is clear when we try to run it:</p>
-<div class="highlight"><pre>&gt;&gt; a = A()
-
-&gt;&gt; a.function_a
-&#39;a&#39;
-
-&gt;&gt; a.function_a()
-TypeError: &#39;str&#39; object is not callable
-</pre></div>
-
-
-<p>Rather than returning a value, we need a way to return a callable object (that will produce that value when called). Luckily, the <code>functools.partial</code> can do this for us. It takes a function name, and some number of arguments, and returns a callable object with the provided arguments already included.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
-
-<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;function_&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_char</span><span class="p">,</span> <span class="n">attr</span><span class="p">[</span><span class="mi">9</span><span class="p">:])</span>
-
-    <span class="k">def</span> <span class="nf">function_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">char</span>
-</pre></div>
-
-
-<p>In this case, rather than returning the character from the method name directly, we bake it into another method, which can be called (without needing to supply any more arguments):</p>
-<div class="highlight"><pre>&gt;&gt; a = A()
-
-&gt;&gt; a.function_a()
-&#39;a&#39;
-
-&gt;&gt; a.function_a
-&lt;functools.partial object at [address]&gt;
-</pre></div>
-
-
-<p>In this case, we're defining methods without arguments, but the same strategy could be used for arguments. <code>functools.partial</code> can be used to bake-in only some of the arguments for a function, while the rest are still provided when it is called.</p>
-<p>For example, suppose, rather than just printing the character, we want <code>function_a</code>, <code>function_b</code>, etc. to take an integer argument of the number of times to print the character.</p>
-<div class="highlight"><pre>&gt;&gt; a.function_a(1)
-&#39;a&#39;
-
-&gt;&gt; a.function_a(5)
-&#39;aaaaa&#39;
-</pre></div>
-
-
-<p>We just have to change the definition of <code>function_char</code> to take this extra variable:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">function_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">char</span>
-</pre></div>
-
-
-<p>And all our methods <code>function_a</code>, <code>function_b</code>, etc. now take an integer argument, with no change to <code>__getattr__</code> needed.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name ...</p>
+                <a class="readmore" href="/avoiding-repetitive-methods.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -196,6 +124,7 @@ TypeError: &#39;str&#39; object is not callable
                         <ul>
 
                             <li><a href="http://twitter.com/_greenca">Twitter</a></li>
+                            <li><a href="http://github.com/greenca">Github</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
