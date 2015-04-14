@@ -41,44 +41,44 @@
 <p>In <a href="/category/computer.html">Computer</a>. </p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->      <p>In Python, you can assign a default value to an optional varible like so:</p>
-<div class="highlight"><pre><span class="n">def</span> <span class="n">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span>
-    <span class="n">print</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight"><pre>def myFunction(x, y = 0):
+    print x + y
 </pre></div>
 
 
 <p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
 <p>This is all perfectly straightforward and works just a you would expect, no matter what you put in the body of the function.</p>
 <p>Suppose, however, that instead of integers, we want to do something with lists:</p>
-<div class="highlight"><pre><span class="n">def</span> <span class="n">listFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span>
-    <span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">print</span> <span class="n">y</span>
+<div class="highlight"><pre>def listFunction(x, y = []):
+    y.append(x)
+    print y
 </pre></div>
 
 
 <p>The difference here is that lists are mutable. So if we call this function with two arguments, the list we pass as <code>y</code> will be changed:</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="highlight"><pre>&gt;&gt; a = [1, 2, 3]
+&gt;&gt; listFunction(4, a)
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+[1, 2, 3, 4]
 
-<span class="o">&gt;&gt;</span> <span class="n">a</span>
+&gt;&gt; a
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+[1, 2, 3, 4]
 </pre></div>
 
 
 <p>And that's fine. If we write a function like this, it's because we want to change a mutable variable. The problem arises with the default value. Because the default variable is only evaluated once, when the function is defined, it will also be changed by the code:</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre>&gt;&gt; listFunction(1)
 
-<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+[1]
 
-<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+&gt;&gt; listFunction(1)
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+[1, 1]
 
-<span class="o">&gt;&gt;</span> <span class="n">listFunction</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+&gt;&gt; listFunction(2)
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+[1, 1, 2]
 </pre></div>
 
 

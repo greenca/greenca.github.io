@@ -35,14 +35,14 @@
 <p>In <a href="/category/computer.html">Computer</a>. </p>
 <p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
 </footer><!-- /.post-info --><p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
-<div class="highlight"><pre><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;email&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight"><pre>name = request.args[&quot;name&quot;][0]
+email = request.args[&quot;email&quot;][0]
 </pre></div>
 
 
 <p>(Note that the variable used to store these values does not need to be the same as the name of the input element in the form.)</p>
 <p>Now, if you want to include a file input, rather than simpler forms (text boxes, drop-down lists, etc.), this can be easily added to the form:</p>
-<div class="highlight"><pre> <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;filename&quot;</span><span class="o">&gt;</span>
+<div class="highlight"><pre> &lt;input type=&quot;file&quot; name=&quot;filename&quot;&gt;
 </pre></div>
 
 
@@ -75,12 +75,12 @@
 <p>When trying the code above, <code>img["upl_file"].name</code> contains the name of the field (i.e. "upl_file"), <code>img["upl_file"].filename</code> and <code>img["upl_file"].type</code> both have values of <code>None</code>, and <code>img["upl_file"].value</code> contains the name of the file input by the user. The output code fails entirely, as it attempts to open a file with a name of <code>None</code>. And even if it were adjusted, the contents of that file would be only the name of the user's file, rather than the file's contents.</p>
 <p>Now, this was the only example I could find that used <code>cgi.FieldStorage</code> to upload files under Twisted.web. I did, however, find a couple others that solved the problem using Twisted.web2. I would prefer not to use these, I they would involve installing a new web framework, but I did take a look at them to see if I could figure out where the file contents might be hiding. One of the examples included not just the request handling code, but also the html code for the form itself. Which is where I found the important missing component.</p>
 <p>Rather than declare the form as</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+<div class="highlight"><pre>&lt;form method=&quot;post&quot;&gt;
 </pre></div>
 
 
 <p>I should have been including an enctype attribute:</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+<div class="highlight"><pre>&lt;form enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;
 </pre></div>
 
 
