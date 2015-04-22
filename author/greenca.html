@@ -23,7 +23,86 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/julia.html">Julia</a></h1>
+                    <h1 class="entry-title"><a href="/iterating-through-a-list-and-deleting-elements.html">Iterating Through a List and Deleting Elements</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-04-22T00:00:00-07:00">
+                Published: Wed 22 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
+<p>However... let's try it with a simple example:</p>
+<div class="highlight"><pre>&gt;&gt; mylist = range(10)
+&gt;&gt; for x in mylist:
+       print x
+       mylist.remove(x)
+0
+2
+4
+6
+8
+&gt;&gt; mylist
+[1, 3, 5, 7, 9]
+</pre></div>
+
+
+<p>We've managed to only print and delete every other element of our list. The reason this happens is that, while we can loop through python lists without having to access elements by index, but that doesn't mean that the index isn't secretly there.</p>
+<p>Suppose we rewrite our example using indexes to access the list:</p>
+<div class="highlight"><pre>&gt;&gt; mylist = range(10)
+&gt;&gt; for i in range(len(mylist)):
+       print mylist[i]
+       mylist.remove(mylist[i])
+0
+2
+4
+6
+8
+IndexError: list index out of range
+&gt;&gt; mylist
+[1, 3, 5, 7, 9]
+</pre></div>
+
+
+<p>In this case, it's clear what the problem is. We delete the element at index i, which causes all the following elements to move over by one place: the element from index i+1 is now at position i. And then we increase i, skipping over the element that just moved into position i. (We also get an IndexError because, unlike the previous case, we don't stop iterating when we reach the end of the shortened list.)</p>
+<p>The same thing happens in our first example: even though we don't use the index directly in our code, our for-loop is iterating through positions in an array, and thus ends up skipping elements when they change positions.</p>
+<p>We can easily avoid this issue, however, by iterating over a <em>copy</em> of the list, rather than the list being modified:</p>
+<div class="highlight"><pre>&gt;&gt; mylist = range(10)
+&gt;&gt; for x in mylist[:]:
+       print x
+       mylist.remove(x)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+&gt;&gt; mylist
+[]
+</pre></div>
+
+
+<p><code>mylist[:]</code> returns a copy of the whole list, which remains static while we delete elements from the original. And, thus, we get the intended result.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/julia.html" rel="bookmark"
+                           title="Permalink to Julia">Julia</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-02-25T00:00:00-08:00">
                 Published: Wed 25 February 2015
@@ -34,15 +113,10 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>. </p>
 <p>tags: <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info --><p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another language, with it's own special data structures, rather than people able to do serious computation on regular Python data structures. And the NumPy structures feel weird and non-intuitive to me, especially when dealing with vector calculations -- all the operators default to element-wise!</p>
-<p>So, I was pretty excited about Julia. The data structures and operators are similar to Matlab, but it's open-source, and much faster! Which isn't a minor thing, since prototyping in Matlab was easy, but it was unuseably slow for any big calculations.</p>
-<p>However, every time I've tried to actually use Julia for anything other than the simplest task, I've run into problems. Libraries that just won't install. Inexplicable errors that eventually all trace back to some massive change to the language (no matter how recently the tutorial, or whatnot, was written). And, so, I just can't do it. I'm spending way too much time trying to translate code from Julia-of-two-months-ago to Julia-of-today. And even if I succeed, will it still run two months from now?</p>
-<p>I'm still excited about the posibilities of Julia, but it's jut too unstable to use for anything real right now. I'll be sticking with NumPy for now, but I'll probably try Julia again once it stabilizes.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another ...</p>
+                <a class="readmore" href="/julia.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
