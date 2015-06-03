@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Default Arguments in Python</title>
+        <title>Vancouver Mini Maker Faire</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -16,75 +16,34 @@
                 <nav><ul>
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
-                    <li class="active"><a href="/category/computer.html">Computer</a></li>
+                    <li><a href="/category/computer.html">Computer</a></li>
                     <li><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
+                    <li class="active"><a href="/category/other.html">Other</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/default-arguments-in-python.html" rel="bookmark"
-           title="Permalink to Default Arguments in Python">Default Arguments in Python</a></h1>
+        <a href="/vancouver-mini-maker-faire.html" rel="bookmark"
+           title="Permalink to Vancouver Mini Maker Faire">Vancouver Mini Maker Faire</a></h1>
 <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2014-12-17T00:00:00-08:00">
-                Published: Wed 17 December 2014
+        <abbr class="published" title="2015-06-03T00:00:00-07:00">
+                Published: Wed 03 June 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->      <p>In Python, you can assign a default value to an optional varible like so:</p>
-<div class="highlight"><pre>def myFunction(x, y = 0):
-    print x + y
-</pre></div>
+<p>In <a href="/category/other.html">Other</a>. </p>
 
-
-<p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
-<p>This is all perfectly straightforward and works just a you would expect, no matter what you put in the body of the function.</p>
-<p>Suppose, however, that instead of integers, we want to do something with lists:</p>
-<div class="highlight"><pre>def listFunction(x, y = []):
-    y.append(x)
-    print y
-</pre></div>
-
-
-<p>The difference here is that lists are mutable. So if we call this function with two arguments, the list we pass as <code>y</code> will be changed:</p>
-<div class="highlight"><pre>&gt;&gt; a = [1, 2, 3]
-&gt;&gt; listFunction(4, a)
-
-[1, 2, 3, 4]
-
-&gt;&gt; a
-
-[1, 2, 3, 4]
-</pre></div>
-
-
-<p>And that's fine. If we write a function like this, it's because we want to change a mutable variable. The problem arises with the default value. Because the default variable is only evaluated once, when the function is defined, it will also be changed by the code:</p>
-<div class="highlight"><pre>&gt;&gt; listFunction(1)
-
-[1]
-
-&gt;&gt; listFunction(1)
-
-[1, 1]
-
-&gt;&gt; listFunction(2)
-
-[1, 1, 2]
-</pre></div>
-
-
-<p>And this is probably behaviour that we don't want. Now the default value of the variable depends on how many times the function has been called (and with which other variables). Unlike the case where we called the function with two variables, we also can't discard the modified list after using it: it will always hang around, and be accessed whenever that function is called again.</p>
-<p>Obviously, you shouldn't modify a mutable default value like this. But a better practice is to not use mutable values as default values in the first place, so that the default value will stay the same, no matter what crazy thing you might do in the body of the function.</p>
+</footer><!-- /.post-info -->      <p><img alt="Alt Text" src="/images/Im-a-Maker.jpg" /></p>
+<p>I have an exhibit at the <a href="http://makerfaire.ca/">Vancouver Mini Maker Faire</a> this weekend (June 6-7, 2015). It's a <a href="http://www.cristinagreen.com/diy-spectrometer">DIY Spectrophotometer</a>, that is very obviously home-made, but allows you to see the absorption spectrum of different liquid samples. For example, if you look at the spectrum, you can see for yourself that rubbing alcohol and vodka are very very different substances. (Don't drink rubbing alcohol!) </p>
+<p>You can see a gallery of spectra <a href="http://www.cristinagreen.com/diy-spectrometer/pages/spectrum-gallery.html">here</a>, or come try it for yourself at the Faire.</p>
     </div><!-- /.entry-content -->
 
   </article>
