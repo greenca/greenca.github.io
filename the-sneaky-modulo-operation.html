@@ -48,20 +48,51 @@
 
 <p>And what it returns is the remainder when dividing x by 5. If that remainder is 0, then x is divisible by 5. Simple.</p>
 <p>But... what if x is a negative number? Or what if instead of 5, you used -5? What is the "remainder" in those situations?</p>
-<p>That's where things get tricky. Because it turns out that there are three different ways to define the modulo operation, and, depending on which you choose, you get a completely different answer in the cases where any of the arguments are negative. Furthermore, despite the fact that many programming languages use the same symbol to represent the modulo operator, they have defined the operation differently. So an identical calculation can give completely different results, depending on the language it's written in. </p>
+<p>Here's what happens if we try it out in Python:</p>
+<div class="highlight"><pre>&gt;&gt; 13 % 5
+3
+
+&gt;&gt; -13 % 5
+2
+
+&gt;&gt; 13 % -5
+-2
+
+&gt;&gt; -13 % -5
+-3
+</pre></div>
+
+
+<p>But what if we try the same thing in C++?</p>
+<div class="highlight"><pre>&gt;&gt; 13 % 5
+3
+
+&gt;&gt; -13 % 5
+-3
+
+&gt;&gt; 13 % -5
+3
+
+&gt;&gt; -13 % -5
+-3
+</pre></div>
+
+
+<p>This is troubling. What's going on here? </p>
+<p>It turns out that there are three different ways to define the modulo operation, and, depending on which you choose, you get a completely different answer in the cases where any of the arguments are negative. Furthermore, despite the fact that many programming languages use the same symbol to represent the modulo operator, they have defined the operation differently. So an identical calculation can give completely different results, depending on the language it's written in. </p>
 <p>The three different types of modulo are based on the different ways of defining integer division. Which makes sense, since, if the modulo is the "remainder", then we need to know what the integer result of the division is, in order to know how much remainder is left over. So, on to the types of integer division.</p>
 <h1>Truncated Division</h1>
 <p>Truncated Division defines integer division as though it was float division, with everything after the decimal place removed (i.e. the result is truncated, as the name suggests).</p>
-<p><code>7 / 3 = 2.333...</code>, then the integer quotient is 2. This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
-<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is -2. This results in a remainder of -1, since <code>-7 - 3 * (-2) = -1</code>.</p>
-<p><code>7 / -3 = -2.333...</code>, then the integer quotient is -2. This results in a remainder of 1, since <code>7 - (-3) * (-2) = 1</code>.</p>
-<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is 2. This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
+<p><code>7 / 3 = 2.333...</code>, then the integer quotient is 2. <br>This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
+<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is -2. <br>This results in a remainder of -1, since <code>-7 - 3 * (-2) = -1</code>.</p>
+<p><code>7 / -3 = -2.333...</code>, then the integer quotient is -2. <br>This results in a remainder of 1, since <code>7 - (-3) * (-2) = 1</code>.</p>
+<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is 2. <br>This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
 <h1>Floored Division</h1>
 <p>Floored Division defines integer division as the floor of the float division, the largest integer less than or equal to the float division.</p>
-<p><code>7 / 3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
-<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. This results in a remainder of 2, since <code>-7 - 3 * (-3) = 2</code>.</p>
-<p><code>7 / -3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. This results in a remainder of -2, since <code>7 - (-3) * (-3) = -2</code>.</p>
-<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
+<p><code>7 / 3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. <br>This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
+<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. <br>This results in a remainder of 2, since <code>-7 - 3 * (-3) = 2</code>.</p>
+<p><code>7 / -3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. <br>This results in a remainder of -2, since <code>7 - (-3) * (-3) = -2</code>.</p>
+<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. <br>This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
 <h1>Euclidean Division</h1>
 <p>Unlike the previous two definition, Euclidean Division is defined by the remainder, rather than the quotient itself. It is based on the requirement that the remainder never be a negative number. For the division <code>a / b</code> (where <code>b</code> is not zero), there are unique integers <code>q</code> and <code>r</code> such that <code>a = bq + r</code> and <code>0 &lt;= r &lt; |b|</code>. <code>q</code> is defined to be the quotient (the result of the integer division), and <code>r</code> is the remainder (the result of the modulo operation).</p>
 <p>If <code>a = 7</code> and <code>b = 3</code>, then <code>q = 2</code> and <code>r = 1</code>, since <code>7 = 3 * 2 + 1</code>.</p>
@@ -72,49 +103,51 @@
 <table>
 <thead>
 <tr>
-<th>a</th>
-<th>b</th>
-<th>Truncated Division</th>
-<th>Floored Division</th>
-<th>Euclidean Division</th>
+<th><center>Dividend</th>
+<th><center>Divisor</th>
+<th><center>Truncated Division</th>
+<th><center>Floored Division</th>
+<th><center>Euclidean Division</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>7</td>
-<td>3</td>
-<td>q = 2, r = 1</td>
-<td>q = 2, r = 1</td>
-<td>q = 2, r = 1</td>
+<td><center>7</td>
+<td><center>3</td>
+<td><center>q = 2, r = 1</td>
+<td><center>q = 2, r = 1</td>
+<td><center>q = 2, r = 1</td>
 </tr>
 <tr>
-<td>-7</td>
-<td>3</td>
-<td>q = -2, r = -1</td>
-<td>q = -3, r = 2</td>
-<td>q = -3, r = 2</td>
+<td><center>-7</td>
+<td><center>3</td>
+<td><center>q = -2, r = -1</td>
+<td><center>q = -3, r = 2</td>
+<td><center>q = -3, r = 2</td>
 </tr>
 <tr>
-<td>7</td>
-<td>-3</td>
-<td>q = -2, r = 1</td>
-<td>q = -3, r = -2</td>
-<td>q = -2, r = 1</td>
+<td><center>7</td>
+<td><center>-3</td>
+<td><center>q = -2, r = 1</td>
+<td><center>q = -3, r = -2</td>
+<td><center>q = -2, r = 1</td>
 </tr>
 <tr>
-<td>-7</td>
-<td>-3</td>
-<td>q = 2, r = -1</td>
-<td>q = 2, r = -1</td>
-<td>q = 3, r = 2</td>
+<td><center>-7</td>
+<td><center>-3</td>
+<td><center>q = 2, r = -1</td>
+<td><center>q = 2, r = -1</td>
+<td><center>q = 3, r = 2</td>
 </tr>
 </tbody>
 </table>
+<p>As the table above demonstrates, the modulo matches the sign of the Dividend under Truncated Division, and matches the sign of the Divisor under Floored Division. And the modulo is always positive under Euclidean Division. </p>
 <h1>Programming Languages</h1>
 <p>Each programming language has chosen a definition to use for it's default modulo operator. (A few languages have multiple variations defined, under different keywords/operators.)</p>
 <p>Python has defined <code>%</code> using Floored Division. It also offers the Truncated Division definition as <code>math.fmod</code>.</p>
 <p>C++ <code>%</code> used to be implementation-defined (which is a pretty bad option, since you can't count on anything), while <code>div</code> was Truncated Division. As of ISO 2011, they are both Truncated Division.</p>
 <p>Some math-focused languages like Matlab and Julia do both: <code>mod</code> is Floored Division and <code>rem</code> is Truncated Division. Another, Maple, is one of the few that has gone with Euclidean Division. </p>
+<p>Luckily, they all match when everything is positive, so you can confidently solve FizzBuzz in any language. But as soon as any negative numbers are a possibility, be very wary...</p>
     </div><!-- /.entry-content -->
 
   </article>
