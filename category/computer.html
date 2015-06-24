@@ -24,7 +24,104 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/iterating-through-a-list-and-deleting-elements.html">Iterating Through a List and Deleting Elements</a></h1>
+                    <h1 class="entry-title"><a href="/the-sneaky-modulo-operation.html">The Sneaky Modulo Operation</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-06-22T00:00:00-07:00">
+                Published: Mon 22 June 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>
+</footer><!-- /.post-info --><p>Suppose you need to know if a given number is a multiple of, say, 5. There's a simple solution to this problem: the modulo operator. In many languages, it looks like this:</p>
+<div class="highlight"><pre>x % 5
+</pre></div>
+
+
+<p>And what it returns is the remainder when dividing x by 5. If that remainder is 0, then x is divisible by 5. Simple.</p>
+<p>But... what if x is a negative number? Or what if instead of 5, you used -5? What is the "remainder" in those situations?</p>
+<p>That's where things get tricky. Because it turns out that there are three different ways to define the modulo operation, and, depending on which you choose, you get a completely different answer in the cases where any of the arguments are negative. Furthermore, despite the fact that many programming languages use the same symbol to represent the modulo operator, they have defined the operation differently. So an identical calculation can give completely different results, depending on the language it's written in. </p>
+<p>The three different types of modulo are based on the different ways of defining integer division. Which makes sense, since, if the modulo is the "remainder", then we need to know what the integer result of the division is, in order to know how much remainder is left over. So, on to the types of integer division.</p>
+<h1>Truncated Division</h1>
+<p>Truncated Division defines integer division as though it was float division, with everything after the decimal place removed (i.e. the result is truncated, as the name suggests).</p>
+<p><code>7 / 3 = 2.333...</code>, then the integer quotient is 2. This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
+<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is -2. This results in a remainder of -1, since <code>-7 - 3 * (-2) = -1</code>.</p>
+<p><code>7 / -3 = -2.333...</code>, then the integer quotient is -2. This results in a remainder of 1, since <code>7 - (-3) * (-2) = 1</code>.</p>
+<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is 2. This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
+<h1>Floored Division</h1>
+<p>Floored Division defines integer division as the floor of the float division, the largest integer less than or equal to the float division.</p>
+<p><code>7 / 3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. This results in a remainder of 1, since <code>7 - 3 * 2 = 1</code>.</p>
+<p><code>-7 / 3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. This results in a remainder of 2, since <code>-7 - 3 * (-3) = 2</code>.</p>
+<p><code>7 / -3 = -2.333...</code>, then the integer quotient is <code>floor(-2.333...) = -3</code>. This results in a remainder of -2, since <code>7 - (-3) * (-3) = -2</code>.</p>
+<p><code>-7 / -3 = 2.333...</code>, then the integer quotient is <code>floor(2.333...) = 2</code>. This results in a remainder of -1, since <code>-7 - (-3) * 2 = -1</code>.</p>
+<h1>Euclidean Division</h1>
+<p>Unlike the previous two definition, Euclidean Division is defined by the remainder, rather than the quotient itself. It is based on the requirement that the remainder never be a negative number. For the division <code>a / b</code> (where <code>b</code> is not zero), there are unique integers <code>q</code> and <code>r</code> such that <code>a = bq + r</code> and <code>0 &lt;= r &lt; |b|</code>. <code>q</code> is defined to be the quotient (the result of the integer division), and <code>r</code> is the remainder (the result of the modulo operation).</p>
+<p>If <code>a = 7</code> and <code>b = 3</code>, then <code>q = 2</code> and <code>r = 1</code>, since <code>7 = 3 * 2 + 1</code>.</p>
+<p>If <code>a = -7</code> and <code>b = 3</code>, then <code>q = -3</code> and <code>r = 2</code>, since <code>-7 = 3 * (-3) + 2</code>.</p>
+<p>If <code>a = 7</code> and <code>b = -3</code>, then <code>q = -2</code> and <code>r = 1</code>, since <code>7 = (-3) * (-2) + 1</code>.</p>
+<p>If <code>a = -7</code> and <code>b = -3</code>, then <code>q = 3</code> and <code>r = 2</code>, since <code>-7 = (-3) * 3 + 2</code>.</p>
+<h1>Comparison</h1>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>Truncated Division</th>
+<th>Floored Division</th>
+<th>Euclidean Division</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>q = 2, r = 1</td>
+<td>q = 2, r = 1</td>
+<td>q = 2, r = 1</td>
+</tr>
+<tr>
+<td>-7</td>
+<td>3</td>
+<td>q = -2, r = -1</td>
+<td>q = -3, r = 2</td>
+<td>q = -3, r = 2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>-3</td>
+<td>q = -2, r = 1</td>
+<td>q = -3, r = -2</td>
+<td>q = -2, r = 1</td>
+</tr>
+<tr>
+<td>-7</td>
+<td>-3</td>
+<td>q = 2, r = -1</td>
+<td>q = 2, r = -1</td>
+<td>q = 3, r = 2</td>
+</tr>
+</tbody>
+</table>
+<h1>Programming Languages</h1>
+<p>Each programming language has chosen a definition to use for it's default modulo operator. (A few languages have multiple variations defined, under different keywords/operators.)</p>
+<p>Python has defined <code>%</code> using Floored Division. It also offers the Truncated Division definition as <code>math.fmod</code>.</p>
+<p>C++ <code>%</code> used to be implementation-defined (which is a pretty bad option, since you can't count on anything), while <code>div</code> was Truncated Division. As of ISO 2011, they are both Truncated Division.</p>
+<p>Some math-focused languages like Matlab and Julia do both: <code>mod</code> is Floored Division and <code>rem</code> is Truncated Division. Another, Maple, is one of the few that has gone with Euclidean Division. </p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/iterating-through-a-list-and-deleting-elements.html" rel="bookmark"
+                           title="Permalink to Iterating Through a List and Deleting Elements">Iterating Through a List and Deleting Elements</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-04-22T00:00:00-07:00">
                 Published: Wed 22 April 2015
@@ -35,67 +132,12 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>. </p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info --><p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
+</footer><!-- /.post-info -->                <p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
 <p>However... let's try it with a simple example:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range(10)
-&gt;&gt; for x in mylist:
-       print x
-       mylist.remove(x)
-0
-2
-4
-6
-8
-&gt;&gt; mylist
-[1, 3, 5, 7, 9]
-</pre></div>
-
-
-<p>We've managed to only print and delete every other element of our list. The reason this happens is that, while we can loop through python lists without having to access elements by index, but that doesn't mean that the index isn't secretly there.</p>
-<p>Suppose we rewrite our example using indexes to access the list:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range(10)
-&gt;&gt; for i in range(len(mylist)):
-       print mylist[i]
-       mylist.remove(mylist[i])
-0
-2
-4
-6
-8
-IndexError: list index out of range
-&gt;&gt; mylist
-[1, 3, 5, 7, 9]
-</pre></div>
-
-
-<p>In this case, it's clear what the problem is. We delete the element at index i, which causes all the following elements to move over by one place: the element from index i+1 is now at position i. And then we increase i, skipping over the element that just moved into position i. (We also get an IndexError because, unlike the previous case, we don't stop iterating when we reach the end of the shortened list.)</p>
-<p>The same thing happens in our first example: even though we don't use the index directly in our code, our for-loop is iterating through positions in an array, and thus ends up skipping elements when they change positions.</p>
-<p>We can easily avoid this issue, however, by iterating over a <em>copy</em> of the list, rather than the list being modified:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range(10)
-&gt;&gt; for x in mylist[:]:
-       print x
-       mylist.remove(x)
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-&gt;&gt; mylist
-[]
-</pre></div>
-
-
-<p><code>mylist[:]</code> returns a copy of the whole list, which remains static while we delete elements from the original. And, thus, we get the intended result.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<div class="highlight"><pre>&gt;&gt; mylist = range ...</pre></div>
+                <a class="readmore" href="/iterating-through-a-list-and-deleting-elements.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
