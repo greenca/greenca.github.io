@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Cristina Green</title>
+        <title>Chebyshev Collocation for First-Order Systems of Differential Equations</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -17,14 +17,20 @@
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
                     <li><a href="/category/computer.html">Computer</a></li>
-                    <li><a href="/category/math.html">Math</a></li>
+                    <li class="active"><a href="/category/math.html">Math</a></li>
                     <li><a href="/category/other.html">Other</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html" rel="bookmark"
+           title="Permalink to Chebyshev Collocation for First-Order Systems of Differential Equations">Chebyshev Collocation for First-Order Systems of Differential Equations</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html">Chebyshev Collocation for First-Order Systems of Differential Equations</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-07-31T00:00:00-07:00">
                 Published: Fri 31 July 2015
@@ -35,7 +41,7 @@
         </address>
 <p>In <a href="/category/math.html">Math</a>. </p>
 <p>tags: <a href="/tag/numerics.html">numerics</a> </p>
-</footer><!-- /.post-info --><p>Suppose you have a differential equation that you want to solve numerically. An approach you might take is collocation, which is based on the idea that an unknown function <span class="math">\(u(z)\)</span> can be approximated by a sum of <span class="math">\(N+1\)</span> basis functions <span class="math">\(\phi_n(z)\)</span>:
+</footer><!-- /.post-info -->      <p>Suppose you have a differential equation that you want to solve numerically. An approach you might take is collocation, which is based on the idea that an unknown function <span class="math">\(u(z)\)</span> can be approximated by a sum of <span class="math">\(N+1\)</span> basis functions <span class="math">\(\phi_n(z)\)</span>:
 </p>
 <div class="math">$$ u(z) \approx u_N(z) = \sum_{n=0}^N a_n \phi_n(z) $$</div>
 <p>This approach has the advantage over finite differences that we can guarantee a smooth solution. (Of course, it has the disadvantage that we can't use a non-uniform grid to get more detail in only some areas: since the accuracy of our approximation depends on the number of basis functions we use, we can only add more detail to the entire domain.)</p>
@@ -158,259 +164,11 @@ However, in this case, we have two matrix rows corresponding to each of <span cl
         "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</script>
+    </div><!-- /.entry-content -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/the-sneaky-modulo-operation.html" rel="bookmark"
-                           title="Permalink to The Sneaky Modulo Operation">The Sneaky Modulo Operation</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-06-22T00:00:00-07:00">
-                Published: Mon 22 June 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>
-</footer><!-- /.post-info -->                <p>Suppose you need to know if a given number is a multiple of, say, 5. There's a simple solution to this problem: the modulo operator. In many languages, it looks like this:</p>
-<div class="highlight"><pre>x % 5
-</pre></div>
-
-
-<p>And what it returns is the remainder when dividing x by 5. If that remainder ...</p>
-                <a class="readmore" href="/the-sneaky-modulo-operation.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/vancouver-mini-maker-faire.html" rel="bookmark"
-                           title="Permalink to Vancouver Mini Maker Faire">Vancouver Mini Maker Faire</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-06-03T00:00:00-07:00">
-                Published: Wed 03 June 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/other.html">Other</a>. </p>
-
-</footer><!-- /.post-info -->                <p><img alt="Alt Text" src="/images/Im-a-Maker.jpg" /></p>
-<p>I have an exhibit at the <a href="http://makerfaire.ca/">Vancouver Mini Maker Faire</a> this weekend (June 6-7, 2015). It's a <a href="http://www.cristinagreen.com/diy-spectrometer">DIY Spectrophotometer</a>, that is very obviously home-made, but allows you to see the absorption spectrum of different liquid samples. For example, if you look at the spectrum, you can see for yourself ...</p>
-                <a class="readmore" href="/vancouver-mini-maker-faire.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/iterating-through-a-list-and-deleting-elements.html" rel="bookmark"
-                           title="Permalink to Iterating Through a List and Deleting Elements">Iterating Through a List and Deleting Elements</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-04-22T00:00:00-07:00">
-                Published: Wed 22 April 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
-<p>However... let's try it with a simple example:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range ...</pre></div>
-                <a class="readmore" href="/iterating-through-a-list-and-deleting-elements.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/julia.html" rel="bookmark"
-                           title="Permalink to Julia">Julia</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-02-25T00:00:00-08:00">
-                Published: Wed 25 February 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->                <p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another ...</p>
-                <a class="readmore" href="/julia.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/mathematical-curio.html" rel="bookmark"
-                           title="Permalink to Mathematical Curio">Mathematical Curio</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-01-26T00:00:00-08:00">
-                Published: Mon 26 January 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
-
-</footer><!-- /.post-info -->                <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
-<p>For example:</p>
-<div class="highlight"><pre>number = 12345
-rearranged = 43215
-difference = 43215 - 12345 = 30870
-difference / 9 = 3430
-</pre></div>
-
-
-<p>More generally, you can do the same with numbers ...</p>
-                <a class="readmore" href="/mathematical-curio.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/avoiding-repetitive-methods.html" rel="bookmark"
-                           title="Permalink to Avoiding Repetitive Methods">Avoiding Repetitive Methods</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-01-20T00:00:00-08:00">
-                Published: Tue 20 January 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name ...</p>
-                <a class="readmore" href="/avoiding-repetitive-methods.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/default-arguments-in-python.html" rel="bookmark"
-                           title="Permalink to Default Arguments in Python">Default Arguments in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-12-17T00:00:00-08:00">
-                Published: Wed 17 December 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>In Python, you can assign a default value to an optional varible like so:</p>
-<div class="highlight"><pre>def myFunction(x, y = 0):
-    print x + y
-</pre></div>
-
-
-<p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
-<p>This is all perfectly straightforward ...</p>
-                <a class="readmore" href="/default-arguments-in-python.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/simulated-annealing.html" rel="bookmark"
-                           title="Permalink to Simulated Annealing">Simulated Annealing</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-10-20T00:00:00-07:00">
-                Published: Mon 20 October 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
-<p>tags: <a href="/tag/numerics.html">numerics</a> </p>
-</footer><!-- /.post-info -->                <p>My initial approach to the <a href="/tiling-problem.html">tiling problem</a> was to find all the possible configurations, calculate a measure of the distance between same-colour tiles for each, and then select the configuration with the maximum distance. While this does reliably find the optimal solution, it also very quickly becomes infeasible as the ...</p>
-                <a class="readmore" href="/simulated-annealing.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/tiling-problem.html" rel="bookmark"
-                           title="Permalink to Tiling Problem">Tiling Problem</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-30T00:00:00-07:00">
-                Published: Wed 30 April 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
-
-</footer><!-- /.post-info -->                <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked ...</p>
-                <a class="readmore" href="/tiling-problem.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/uploading-files-using-twisted-web.html" rel="bookmark"
-                           title="Permalink to Uploading files using Twisted Web">Uploading files using Twisted Web</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-07-05T00:00:00-07:00">
-                Published: Thu 05 July 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
-<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
-</footer><!-- /.post-info -->                <p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
-<div class="highlight"><pre>name = request.args ...</pre></div>
-                <a class="readmore" href="/uploading-files-using-twisted-web.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
