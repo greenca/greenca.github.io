@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
         <title>Cristina Green - python</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
-
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">Cristina Green </a></h1>
+                <h1><a href="/">Cristina Green</a></h1>
                 <nav><ul>
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
@@ -33,17 +30,17 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>
 </footer><!-- /.post-info --><p>Suppose you need to know if a given number is a multiple of, say, 5. There's a simple solution to this problem: the modulo operator. In many languages, it looks like this:</p>
-<div class="highlight"><pre>x % 5
-</pre></div>
+<div class="highlight"><pre><span></span><code>x % 5
+</code></pre></div>
 
 
 <p>And what it returns is the remainder when dividing x by 5. If that remainder is 0, then x is divisible by 5. Simple.</p>
 <p>But... what if x is a negative number? Or what if instead of 5, you used -5? What is the "remainder" in those situations?</p>
 <p>Here's what happens if we try it out in Python:</p>
-<div class="highlight"><pre>&gt;&gt; 13 % 5
+<div class="highlight"><pre><span></span><code>&gt;&gt; 13 % 5
 3
 
 &gt;&gt; -13 % 5
@@ -54,11 +51,11 @@
 
 &gt;&gt; -13 % -5
 -3
-</pre></div>
+</code></pre></div>
 
 
 <p>But what if we try the same thing in C++?</p>
-<div class="highlight"><pre>&gt;&gt; 13 % 5
+<div class="highlight"><pre><span></span><code>&gt;&gt; 13 % 5
 3
 
 &gt;&gt; -13 % 5
@@ -69,7 +66,7 @@
 
 &gt;&gt; -13 % -5
 -3
-</pre></div>
+</code></pre></div>
 
 
 <p>This is troubling. What's going on here? </p>
@@ -163,11 +160,12 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
 <p>However... let's try it with a simple example:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range ...</pre></div>
+<div class="highlight"><pre><span></span><code>&gt;&gt; mylist = range(10)
+&gt;&gt; for x …</code></pre></div>
                 <a class="readmore" href="/iterating-through-a-list-and-deleting-elements.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -187,9 +185,9 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name ...</p>
+</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name …</p>
                 <a class="readmore" href="/avoiding-repetitive-methods.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -209,16 +207,16 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>In Python, you can assign a default value to an optional varible like so:</p>
-<div class="highlight"><pre>def myFunction(x, y = 0):
-    print x + y
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div>
 
 
 <p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
-<p>This is all perfectly straightforward ...</p>
+<p>This is all perfectly straightforward …</p>
                 <a class="readmore" href="/default-arguments-in-python.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -238,10 +236,10 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
 </footer><!-- /.post-info -->                <p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
-<div class="highlight"><pre>name = request.args ...</pre></div>
+<div class="highlight"><pre><span></span><code>name = request.args …</code></pre></div>
                 <a class="readmore" href="/uploading-files-using-twisted-web.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -260,21 +258,20 @@
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
                 </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
     <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-60483897-3']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60483897-3', 'auto');
+    ga('send', 'pageview');
     </script>
 </body>
 </html>

@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
         <title>Cristina Green - greenca</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
-
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">Cristina Green </a></h1>
+                <h1><a href="/">Cristina Green</a></h1>
                 <nav><ul>
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
@@ -24,7 +21,95 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/xmonad-configuration-notes.html">XMonad Configuration Notes</a></h1>
+                    <h1 class="entry-title"><a href="/advent-of-code-with-julia.html">Advent of Code with Julia</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-12-06T00:00:00-08:00">
+                Published: Sun 06 December 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
+</footer><!-- /.post-info --><p>I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However, in order to add a bit of challenge, without resorting to racing, this year I'm using a language I don't really know. That's right, it's time for a periodic return to my Attempt to Learn Julia!</p>
+<p>I've gotten a bit further than my last attempt. However, as with then, the tutorials/documentation are still not all that I'd hope. (I notice that they have many videos; however, when I'm trying to find the syntax for something, I don't want to watch a whole video hoping they'll mention it.) So here's a cheatsheet of some basic things I've figured out so far.</p>
+<h1>Loading data from a file</h1>
+<p>To read the whole file, as one long string:</p>
+<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">f</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>To read the file line by line:</p>
+<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">f</span>
+    <span class="k">for</span> <span class="n">ln</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="o">...</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>Once you've read that data, you might want to split it appart into a list:</p>
+<div class="highlight"><pre><span></span><code><span class="n">mylist</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>       <span class="c"># Defaults to splitting on whitespace</span>
+<span class="n">mylist</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="sc">&#39;,&#39;</span><span class="p">)</span>  <span class="c"># Or, provide a delimiter</span>
+</code></pre></div>
+
+
+<p>If you had numbers in that data file of yours, you'll probably want to convert them from strings into numbers:</p>
+<div class="highlight"><pre><span></span><code><span class="n">intval</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">stringval</span><span class="p">)</span>
+<span class="n">floatval</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">stringval</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h1>Searching in your string or array</h1>
+<p>Now that you have your data loaded, maybe you'll want to find a particular value. To check if a value is in your array (or a character in your string):</p>
+<div class="highlight"><pre><span></span><code><span class="n">val</span> <span class="kp">in</span> <span class="n">myarray</span>
+</code></pre></div>
+
+
+<p>If you want to know where is the array your value is, you can use <code>findfirst</code> and <code>findnext</code>. Note that these will both return <code>nothing</code> if you search value is not in the array, and <code>nothing</code> cannot be used as a boolean, so if you want to go through all the occurences of your value, you'll need to check for it:</p>
+<div class="highlight"><pre><span></span><code><span class="n">index</span> <span class="o">=</span> <span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">myarray</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">index</span> <span class="o">!=</span> <span class="nb">nothing</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">findnext</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">myarray</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>These can be used with other conditions in place of <code>isequal</code>, including user defined predicates.</p>
+<h1>Regular Expressions</h1>
+<p>There are various tutorials online for using Regular Expressions in Julia, but they are mostly incorrect. It looks like the methods changed name at some point, so the examples in the tutorial no longer work. For version 1.5.3, you can find if a regular expression matches on your string with <code>occursin</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">occursin</span><span class="p">(</span><span class="sr">r&quot;abc&quot;</span><span class="p">,</span> <span class="s">&quot;abcdefg&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h1>Substitions</h1>
+<p>Substitions can be done with <code>replace</code> on arrays and strings, with a slight variation between the two. For arrays:</p>
+<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">1</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>For strings, the same format applies, but only one substition can be done. You can apply multiple rules by nesting calls to <code>replace</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">(</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;abcdef&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="o">=&gt;</span><span class="s">&quot;x&quot;</span><span class="p">),</span> <span class="s">&quot;b&quot;</span><span class="o">=&gt;</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>However, for strings, <code>replace</code> can also be used with regular expression, which would allow more complicated substitutions, such as reordering substrings. </p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/xmonad-configuration-notes.html" rel="bookmark"
+                           title="Permalink to XMonad Configuration Notes">XMonad Configuration Notes</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2017-03-22T00:00:00-07:00">
                 Published: Wed 22 March 2017
@@ -33,57 +118,12 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 
-</footer><!-- /.post-info --><p>I made a disastrous attempt at upgrading my Ubuntu distribution today. It failed partway through, leaving things in a horrible broken state. I use XMonad as my windows manager, mostly because I hate having to move things around with a mouse. But today it especially paid off, because the half-upgraded operating system was so broken that I couldn't even log in to Unity: it just bounced me back to the log-in screen. XMonad still generally worked, so I was able to fiddle with things, while doing a lot of googling, and eventually I got everything cleaned up.</p>
-<p>But during all this, some of my configurations got messed up, so they needed to be fixed. And I couldn't quite remember how the XMonad configuration worked, so I thought perhaps I should <em>Write It Down</em>, for next time.</p>
-<h3>~/.xmonad/xmonad.hs</h3>
-<p>This is the main configuration file for XMonad. It spawns XMobar (more on this later). It's also where you'd put any keybindings. For example, by default, the volume and mute keys on my laptop don't work under XMonad: they have to be specifically bound in <code>xmonad.hs</code> as follows</p>
-<div class="highlight"><pre>...
-`additionalKeys`
-[ ((0, 0x1008FF11), spawn &quot;amixer set Master 2-&quot;)
-, ((0, 0x1008FF13), spawn &quot;amixer set Master 2+&quot;)
-, ((0, 0x1008FF12), spawn &quot;amixer -D pulse set Master toggle&quot;)
-]
-</pre></div>
-
-
-<h3>XMobar</h3>
-<p>I also run XMobar, to add a status bar to XMonad (which would otherwise just be an empty screen). As mentioned above, XMobar is started by <code>xmonad.hs</code>, but it is configured in <code>~/.xmobarrc</code>:</p>
-<div class="highlight"><pre>Config { font = &quot;-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*&quot;
-    , borderColor = &quot;black&quot;
-    , border = TopB
-    , bgColor = &quot;black&quot;
-    , fgColor = &quot;grey&quot;
-    , position = TopW L 100
-    , lowerOnStart = True
-    , commands = [ Run Cpu [&quot;-L&quot;,&quot;3&quot;,&quot;-H&quot;,&quot;50&quot;,&quot;--normal&quot;,&quot;green&quot;,&quot;--high&quot;,&quot;red&quot;] 10
-                 , Run Memory [&quot;-t&quot;,&quot;Mem: &lt;usedratio&gt;%&quot;] 10
-                 , Run Swap [] 10
-                 , Run BatteryP [&quot;BAT0&quot;] [&quot;-t&quot;, &quot;&lt;acstatus&gt;&quot;
-                                         , &quot;-L&quot;, &quot;10&quot;, &quot;-H&quot;, &quot;80&quot;
-                                         , &quot;-l&quot;, &quot;red&quot;, &quot;-h&quot;, &quot;green&quot;
-                                         , &quot;--&quot;, &quot;-O&quot;, &quot;Charging&quot;, &quot;-o&quot;, &quot;Battery: &lt;left&gt;%&quot;
-                                         ] 10
-                 , Run Date &quot;%a %b %_d %Y %H:%M:%S&quot; &quot;date&quot; 10
-                 , Run StdinReader
-                 ]
-    , sepChar = &quot;%&quot;
-    , alignSep = &quot;}{&quot;
-    , template = &quot;%StdinReader% | %cpu% | %memory% * %swap% | %battery%}{&lt;fc=#ee9a00&gt;%date%&lt;/fc&gt; &quot;
-    }
-</pre></div>
-
-
-<p>The <code>commands</code> includes anything you want to monitor. The <a href="http://projects.haskell.org/xmobar/">documentation</a> lists all the possible options, under "System Monitor Plugins". Note that each of their descriptions starts with "Aliases to [something]": this is how you refer to that plugin in the <code>template</code>, where you set how you want everything to be laid-out. If you run a command but don't add it to the template, you won't see anything on your status bar, so remember to make any changes in both places. </p>
-<h3>Start-up Script</h3>
-<p>I also have a file called <code>start-xmonad.sh</code> in my home directory, which starts an icon tray (<code>stalonetray</code>) and sets the background image (using <code>feh</code>), along with other miscellaneous start-up stuff. It ends with <code>exec xmonad</code>. In order for this start-up script to be used when you log in, you need to edit <code>/usr/share/xsessions/xmonad.desktop</code> and replace whatever is in the <code>Exec=</code> line with the full path of the script you want to run. (Hence the <code>exec xmonad</code> at the end of my script: since you're replacing the default command, it won't start at all if you don't call it in your script.)</p>
-<p>My upgrade apparently replaced all the <code>xsessions</code> stuff, so my script was no longer being used. And I didn't check this one right away, since everything is otherwise configured in my home directory, and my nice start-up script was there and worked fine when I called it. It just mysteriously wasn't running automatically... </p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>I made a disastrous attempt at upgrading my Ubuntu distribution today. It failed partway through, leaving things in a horrible broken state. I use XMonad as my windows manager, mostly because I hate having to move things around with a mouse. But today it especially paid off, because the half-upgraded …</p>
+                <a class="readmore" href="/xmonad-configuration-notes.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -100,11 +140,11 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
+<p>In <a href="/category/math.html">Math</a>.</p>
 <p>tags: <a href="/tag/numerics.html">numerics</a> </p>
 </footer><!-- /.post-info -->                <p>Suppose you have a differential equation that you want to solve numerically. An approach you might take is collocation, which is based on the idea that an unknown function <span class="math">\(u(z)\)</span> can be approximated by a sum of <span class="math">\(N+1\)</span> basis functions <span class="math">\(\phi_n(z)\)</span>:
 </p>
-<div class="math">$$ u(z) \approx u_N(z) = \sum_ ...</div>
+<div class="math">$$ u(z) \approx u_N(z) = \sum_ …</div>
                 <a class="readmore" href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -124,14 +164,14 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>
 </footer><!-- /.post-info -->                <p>Suppose you need to know if a given number is a multiple of, say, 5. There's a simple solution to this problem: the modulo operator. In many languages, it looks like this:</p>
-<div class="highlight"><pre>x % 5
-</pre></div>
+<div class="highlight"><pre><span></span><code>x % 5
+</code></pre></div>
 
 
-<p>And what it returns is the remainder when dividing x by 5. If that remainder ...</p>
+<p>And what it returns is the remainder when dividing x by 5. If that remainder is …</p>
                 <a class="readmore" href="/the-sneaky-modulo-operation.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -151,10 +191,10 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/other.html">Other</a>. </p>
+<p>In <a href="/category/other.html">Other</a>.</p>
 
-</footer><!-- /.post-info -->                <p><img alt="Alt Text" src="/images/Im-a-Maker.jpg" /></p>
-<p>I have an exhibit at the <a href="http://makerfaire.ca/">Vancouver Mini Maker Faire</a> this weekend (June 6-7, 2015). It's a <a href="http://www.cristinagreen.com/diy-spectrometer">DIY Spectrophotometer</a>, that is very obviously home-made, but allows you to see the absorption spectrum of different liquid samples. For example, if you look at the spectrum, you can see for yourself ...</p>
+</footer><!-- /.post-info -->                <p><img alt="Alt Text" src="/images/Im-a-Maker.jpg"></p>
+<p>I have an exhibit at the <a href="http://makerfaire.ca/">Vancouver Mini Maker Faire</a> this weekend (June 6-7, 2015). It's a <a href="http://www.cristinagreen.com/diy-spectrometer">DIY Spectrophotometer</a>, that is very obviously home-made, but allows you to see the absorption spectrum of different liquid samples. For example, if you look at the spectrum, you can see for yourself that …</p>
                 <a class="readmore" href="/vancouver-mini-maker-faire.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -174,11 +214,12 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>Suppose you're iterating through a list, and you want to remove elements under some condition. This seems pretty easy: you've got an element, and python lists have a <code>remove</code> method that you can call with that element.</p>
 <p>However... let's try it with a simple example:</p>
-<div class="highlight"><pre>&gt;&gt; mylist = range ...</pre></div>
+<div class="highlight"><pre><span></span><code>&gt;&gt; mylist = range(10)
+&gt;&gt; for x …</code></pre></div>
                 <a class="readmore" href="/iterating-through-a-list-and-deleting-elements.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -198,9 +239,9 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->                <p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another ...</p>
+</footer><!-- /.post-info -->                <p>I had planned to write a blog post about how great Julia is. I spent many years using Matlab, both in grad school and in finance. Since then, I've been using NumPy for mathy things, but it feels really awkward, since it's just sitting on top of another language, with …</p>
                 <a class="readmore" href="/julia.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -220,18 +261,18 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
+<p>In <a href="/category/math.html">Math</a>.</p>
 
 </footer><!-- /.post-info -->                <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
 <p>For example:</p>
-<div class="highlight"><pre>number = 12345
+<div class="highlight"><pre><span></span><code>number = 12345
 rearranged = 43215
 difference = 43215 - 12345 = 30870
 difference / 9 = 3430
-</pre></div>
+</code></pre></div>
 
 
-<p>More generally, you can do the same with numbers ...</p>
+<p>More generally, you can do the same with numbers …</p>
                 <a class="readmore" href="/mathematical-curio.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -251,9 +292,9 @@ difference / 9 = 3430
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name ...</p>
+</footer><!-- /.post-info -->                <p>We all know that you should avoid writing the same code over and over: put it in a function and just call that function whenever you need it. But what if what you need is a class with a whole bunch of really similar methods, each with a different name …</p>
                 <a class="readmore" href="/avoiding-repetitive-methods.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -273,16 +314,16 @@ difference / 9 = 3430
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> </p>
 </footer><!-- /.post-info -->                <p>In Python, you can assign a default value to an optional varible like so:</p>
-<div class="highlight"><pre>def myFunction(x, y = 0):
-    print x + y
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div>
 
 
 <p><code>myFunction</code> can be called with either one or two arguments. If only one argument is supplied, <code>y</code> will have a value of 0.</p>
-<p>This is all perfectly straightforward ...</p>
+<p>This is all perfectly straightforward …</p>
                 <a class="readmore" href="/default-arguments-in-python.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -302,9 +343,9 @@ difference / 9 = 3430
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
+<p>In <a href="/category/math.html">Math</a>.</p>
 <p>tags: <a href="/tag/numerics.html">numerics</a> </p>
-</footer><!-- /.post-info -->                <p>My initial approach to the <a href="/tiling-problem.html">tiling problem</a> was to find all the possible configurations, calculate a measure of the distance between same-colour tiles for each, and then select the configuration with the maximum distance. While this does reliably find the optimal solution, it also very quickly becomes infeasible as the ...</p>
+</footer><!-- /.post-info -->                <p>My initial approach to the <a href="/tiling-problem.html">tiling problem</a> was to find all the possible configurations, calculate a measure of the distance between same-colour tiles for each, and then select the configuration with the maximum distance. While this does reliably find the optimal solution, it also very quickly becomes infeasible as the …</p>
                 <a class="readmore" href="/simulated-annealing.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -324,9 +365,9 @@ difference / 9 = 3430
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
+<p>In <a href="/category/math.html">Math</a>.</p>
 
-</footer><!-- /.post-info -->                <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked ...</p>
+</footer><!-- /.post-info -->                <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked …</p>
                 <a class="readmore" href="/tiling-problem.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -346,10 +387,10 @@ difference / 9 = 3430
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/computer.html">Computer</a>. </p>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/python.html">python</a> <a href="/tag/twisted.html">twisted</a> </p>
 </footer><!-- /.post-info -->                <p>Inputting information through web forms is really easy under Twisted web. You just have to set up <code>render_GET</code> to display a form, where each input element has a name (e.g. "name", "email", whatever). Then, <code>render_POST</code>, taking an argument of request, can access these values as follows:</p>
-<div class="highlight"><pre>name = request.args ...</pre></div>
+<div class="highlight"><pre><span></span><code>name = request.args …</code></pre></div>
                 <a class="readmore" href="/uploading-files-using-twisted-web.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -368,21 +409,20 @@ difference / 9 = 3430
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
                 </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
     <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-60483897-3']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60483897-3', 'auto');
+    ga('send', 'pageview');
     </script>
 </body>
 </html>

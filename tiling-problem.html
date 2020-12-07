@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
         <title>Tiling Problem</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
-
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <meta name="description" content="We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering..." />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">Cristina Green </a></h1>
+                <h1><a href="/">Cristina Green</a></h1>
                 <nav><ul>
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
@@ -27,7 +25,7 @@
       <h1 class="entry-title">
         <a href="/tiling-problem.html" rel="bookmark"
            title="Permalink to Tiling Problem">Tiling Problem</a></h1>
-<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
 
     <div class="entry-content">
@@ -39,11 +37,11 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/greenca.html">greenca</a>
         </address>
-<p>In <a href="/category/math.html">Math</a>. </p>
+<p>In <a href="/category/math.html">Math</a>.</p>
 
 </footer><!-- /.post-info -->      <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked <em>wrong</em>. Eventually I had to adjust it. Here's the "most correct" looking arrangement I came up with:</p>
 <p><a href="images/4colours_2x4.png">
-<img alt="Alt Text" src="/images/4colours_2x4-300x226.png" />
+<img alt="Alt Text" src="/images/4colours_2x4-300x226.png">
 </a></p>
 <p>It appears to be the arrangement in which tiles of the same colour are as fair apart from each other as possible. I wondered if this "rule" could be used to automatically generate the most aesthetically pleasing arrangement.</p>
 <p>The first issue was how to measure how "far apart" tiles of the same colour are. For each same-coloured pair, I calculated a distance, based on their grid positions. (Adjacent tiles have a distance of 1, diagonal tiles have a distance of sqrt(2).) But how should we combine the measurements for all the pairs.</p>
@@ -57,11 +55,11 @@
 <p>Clearly we need a better distance measure. Just a regular average favoured a single large distance and didn't penalize many other smaller distances enough. Taking the minimum penalized the smaller distances, but isn't sensitive enough to detect small improvements. An inverse square measure seemed like an appropriate compromise between these two (although the problem had to be changed to now minimize this measure, rather than maximizing the distance in the previous two cases).</p>
 <p>With the new improved inverse square simulated annealing set-up, we can now expand our four colours onto a 4x3 grid:</p>
 <p><a href="images/4colours_3x4.png">
-<img alt="Alt Text" src="/images/4colours_3x4-300x226.png" />
+<img alt="Alt Text" src="/images/4colours_3x4-300x226.png">
 </a></p>
 <p>And a 4x4 grid:</p>
 <p><a href="images/4colours_4x4_temp100000000.png">
-<img alt="Alt Text" src="/images/4colours_4x4_temp100000000-300x226.png" />
+<img alt="Alt Text" src="/images/4colours_4x4_temp100000000-300x226.png">
 </a></p>
 <p>Both results keep the original 4x2 pattern, and just add new columns onto it. It's interesting that the 4x4 arrangement isn't even close to rotationally symmetric.</p>
 <p>To come: more grid configurations, and different numbers of colours. And then we can see about tackling this symmetry thing.</p>
@@ -82,21 +80,20 @@
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
                 </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
     <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-60483897-3']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60483897-3', 'auto');
+    ga('send', 'pageview');
     </script>
 </body>
 </html>

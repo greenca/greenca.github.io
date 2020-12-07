@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <title>About</title>
+        <title>Cristina Green - adventofcode julia</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 </head>
 
@@ -18,15 +18,33 @@
                     <li><a href="/category/other.html">Other</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<section id="content" class="body">
-    <h1 class="entry-title">About</h1>
-    
-    <p>I do various things involving math and computers. I'm interested ways we can use computers and math to understand more about the world around us. I've worked on problems in solar physics and finance. I'm currently particularly interested in pattern formation. </p>
-<p>Occasionally I post something mildly interesting or useful here. </p>
-<p><br>
-You can reach me at</p>
-<p><img alt="Alt Text" src="../images/cristina_email.png"></p>
-</section>
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/advent-of-code-with-julia.html">Advent of Code with Julia</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-12-06T00:00:00-08:00">
+                Published: Sun 06 December 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/adventofcode-julia.html">adventofcode julia</a> </p>
+</footer><!-- /.post-info --><p>I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However, in order to add a bit of challenge, without resorting to racing, this year I'm using a language I don't really know. That's right, it's time for a periodic return to my Attempt to Learn Julia!</p>
+<p>I've gotten a bit further than my last attempt. However, as with then, the tutorials/documentation are still not all that I'd hope. (I notice that they have many videos; however, when I'm trying to find the syntax for something, I don't want to watch a whole video hoping they'll mention it.) So here's a cheatsheet of some basic things I've figured out so far.</p>
+<h1>Loading data from a file</h1>
+<p>To read the whole file, as one long string:</p>
+<div class="highlight"><pre><span></span><code><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">:::julia</span>
+<span class="s1">    open(&quot;filename.txt&quot;, &quot;r&quot;) do f</span>
+<span class="s1">        data = read(f, String)</span>
+<span class="s1">end</span>
+<span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div>                </article>
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
