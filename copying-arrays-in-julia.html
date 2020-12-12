@@ -3,8 +3,9 @@
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <title>Cristina Green - advent of code</title>
+        <title>Copying Arrays in Julia</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="description" content="By default, Julia will copy an array by reference. This means that if you change any values in the copy, the original will also change. For..." />
 </head>
 
 <body id="index" class="home">
@@ -13,15 +14,21 @@
                 <nav><ul>
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/projects.html">Projects</a></li>
-                    <li><a href="/category/computer.html">Computer</a></li>
+                    <li class="active"><a href="/category/computer.html">Computer</a></li>
                     <li><a href="/category/math.html">Math</a></li>
                     <li><a href="/category/other.html">Other</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/copying-arrays-in-julia.html" rel="bookmark"
+           title="Permalink to Copying Arrays in Julia">Copying Arrays in Julia</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/copying-arrays-in-julia.html">Copying Arrays in Julia</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-12-11T00:00:00-08:00">
                 Published: Fri 11 December 2020
@@ -32,7 +39,7 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info --><p>By default, Julia will copy an array by reference. This means that if you change any values in the copy, the original will also change. For example:</p>
+</footer><!-- /.post-info -->      <p>By default, Julia will copy an array by reference. This means that if you change any values in the copy, the original will also change. For example:</p>
 <div class="highlight"><pre><span></span><code>&gt; x = [1, 2, 3]
 &gt; z = x
 &gt; z[1] = 10
@@ -68,59 +75,11 @@
 &gt; z[1][1] = 10
 &gt; print(x)
 [[1, 2, 3], [4, 5, 6]]
-</code></pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</code></pre></div>
+    </div><!-- /.entry-content -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/regular-expressions-with-julia.html" rel="bookmark"
-                           title="Permalink to Regular Expressions with Julia">Regular Expressions with Julia</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2020-12-07T00:00:00-08:00">
-                Published: Mon 07 December 2020
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>.</p>
-<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->                <p>I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there were a lot of inputs of the form:</p>
-<div class="highlight"><pre><span></span><code>light orange bags contain 1 dark maroon bag, 3 dim maroon bags, 5 striped …</code></pre></div>
-                <a class="readmore" href="/regular-expressions-with-julia.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/advent-of-code-with-julia.html" rel="bookmark"
-                           title="Permalink to Advent of Code with Julia">Advent of Code with Julia</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2020-12-06T00:00:00-08:00">
-                Published: Sun 06 December 2020
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>.</p>
-<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->                <p>I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However, in order to add a bit of challenge, without resorting to racing, this year I'm using a language I don't really know. That's right, it's …</p>
-                <a class="readmore" href="/advent-of-code-with-julia.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>

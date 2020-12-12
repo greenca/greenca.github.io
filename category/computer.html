@@ -21,7 +21,67 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/regular-expressions-with-julia.html">Regular Expressions with Julia</a></h1>
+                    <h1 class="entry-title"><a href="/copying-arrays-in-julia.html">Copying Arrays in Julia</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-12-11T00:00:00-08:00">
+                Published: Fri 11 December 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
+        </address>
+<p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
+</footer><!-- /.post-info --><p>By default, Julia will copy an array by reference. This means that if you change any values in the copy, the original will also change. For example:</p>
+<div class="highlight"><pre><span></span><code>&gt; x = [1, 2, 3]
+&gt; z = x
+&gt; z[1] = 10
+&gt; print(x)
+[10, 2, 3]
+</code></pre></div>
+
+
+<p>You can avoid this by using <code>copy()</code>:</p>
+<div class="highlight"><pre><span></span><code>&gt; x = [1, 2, 3]
+&gt; z = copy(x)
+&gt; z[1] = 10
+&gt; print(x)
+[1, 2, 3]
+</code></pre></div>
+
+
+<p>However, this is only a shallow copy: it makes a copy of the data structure, but any objects within it are still copied by reference. Which is fine if it's an array of integer. But suppose instead you have an array of arrays:</p>
+<div class="highlight"><pre><span></span><code>&gt; x = [[1, 2, 3], [4, 5, 6]]
+&gt; z = copy(x)
+&gt; z[1][1] = 10
+&gt; print(x)
+[[10, 2, 3], [4, 5, 6]]
+&gt; z[2] = [7, 8, 9]
+&gt; print(x)
+[[10, 2, 3], [4, 5, 6]]
+</code></pre></div>
+
+
+<p>You can see that the outer array structure was copied, but the inner arrays are still references to the originals. If you want to copy an array and it's contents, recursively, you need instead <code>deepcopy()</code>:</p>
+<div class="highlight"><pre><span></span><code>&gt; x = [[1, 2, 3], [4, 5, 6]]
+&gt; z = deepcopy(x)
+&gt; z[1][1] = 10
+&gt; print(x)
+[[1, 2, 3], [4, 5, 6]]
+</code></pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/regular-expressions-with-julia.html" rel="bookmark"
+                           title="Permalink to Regular Expressions with Julia">Regular Expressions with Julia</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-12-07T00:00:00-08:00">
                 Published: Mon 07 December 2020
@@ -32,47 +92,11 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info --><p>I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there were a lot of inputs of the form:</p>
-<div class="highlight"><pre><span></span><code>light orange bags contain 1 dark maroon bag, 3 dim maroon bags, 5 striped green bags, 2 pale aqua bags.
-wavy bronze bags contain 3 pale black bags, 5 bright turquoise bags, 4 pale orange bags.
-dark coral bags contain 3 bright lavender bags, 1 pale bronze bag, 2 dull blue bags.
-dim chartreuse bags contain 2 wavy plum bags, 4 wavy teal bags, 1 dark crimson bag.
-</code></pre></div>
-
-
-<p>I wanted to convert all this text into a dictionary, with the colours of the external bag as the key. I could get the keys just by splitting:</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">colour</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="s">&quot; bags contain &quot;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>Now I'm left for a string describing the contents of the bag. This can also be split to get a list of the contents:</p>
-<div class="highlight"><pre><span></span><code><span class="n">split</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="sc">&#39;,&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>Each item in the list will look something like this:</p>
-<div class="highlight"><pre><span></span><code>1 dark maroon bag
-3 dim maroon bags
-</code></pre></div>
-
-
-<p>I considered splitting the string, and then recombining the two words of the colour, and discarding the bag[s], to get the number and colour of each of the types of contents. But I thought I'd take the opportunity to experiment a bit more with Regular Expressions.</p>
-<p>Julia allows different components of a Regular Expression to be given names, which can then be referenced later. So, in this case:</p>
-<div class="highlight"><pre><span></span><code><span class="n">m</span> <span class="o">=</span> <span class="n">match</span><span class="p">(</span><span class="sr">r&quot;(?&lt;count&gt;\d+) (?&lt;colour&gt;\w+ \w+) bag&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>Some bags have no other bags inside: in this cases, the Regular Expression is not matched, and m has a value of <code>nothing</code>. Otherwise, the named components can then be accessed as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="nb">nothing</span>
-    <span class="n">colour</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">:</span><span class="n">colour</span><span class="p">]</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="o">:</span><span class="n">count</span><span class="p">])</span>
-<span class="k">end</span>
-</code></pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there were a lot of inputs of the form:</p>
+<div class="highlight"><pre><span></span><code>light orange bags contain 1 dark maroon bag, 3 dim maroon bags, 5 striped …</code></pre></div>
+                <a class="readmore" href="/regular-expressions-with-julia.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
