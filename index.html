@@ -32,7 +32,8 @@
         </address>
 <p>In <a href="/category/computer.html">Computer</a>.</p>
 <p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info --><p>I have come to the alarming realization that it's been so long since I've used Matlab, that I had forgotten that 2D arrays exist, and that they're different from the arrays of arrays that you might use to approximate them. Which means that I've been foolishly using arrays of arrays in Julia this entire time. And I did realize it until I wanted to consider a single column (i.e. the ith value in each list), which was an awkward thing to do. Unless, of course, you have a real 2D array, in which case you can access the ith column just as easily as the ith row.</p>
+</footer><!-- /.post-info --><h2>2D Arrays</h2>
+<p>I have come to the alarming realization that it's been so long since I've used Matlab, that I had forgotten that 2D arrays exist, and that they're different from the arrays of arrays that you might use to approximate them. Which means that I've been foolishly using arrays of arrays in Julia this entire time. And I did realize it until I wanted to consider a single column (i.e. the ith value in each list), which was an awkward thing to do. Unless, of course, you have a real 2D array, in which case you can access the ith column just as easily as the ith row.</p>
 <p>So, now that I remembered that 2D arrays existed, I just had to figure out how to get my data <em>into</em> one.</p>
 <p>Until this point, I'd been reading data from files, one row at at time. I would split each row, and then add that array, representing one line of data, to an overall array. Which means I'd end up with an array of arrays. Luckily, it turned out to be straightforward to convert an array of arrays to a single 2D array, using the power of <code>hcat</code>. What I want to do is loop through my array and <code>hcat</code> each of it's elements, which gives me my 2D array. But even better than looping, I can use <code>...</code> to pass all the individual elements of the array as arguments (instead of the array itself), which means that I can call <code>hcat</code> just once:</p>
 <div class="highlight"><pre><span></span><code>&gt;&gt; x = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
@@ -64,7 +65,47 @@
 </code></pre></div>
 
 
-<p>This took me an absurdly long time to figure out, considering how simple it ended up being. But now that I have <em>written it down</em>, I hope that I'll be able to do it much more easily next time. </p>                </article>
+<p>This took me an absurdly long time to figure out, considering how simple it ended up being. But now that I have <em>written it down</em>, I hope that I'll be able to do it much more easily next time. </p>
+<h2>Filtering an Array</h2>
+<p>Another useful (and simple) discovery is using <code>filter!</code> to remove unwanted elements from an array.</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt; x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+10-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+
+&gt;&gt; filter!(e-&gt;e!=5, x)
+9-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 6
+ 7
+ 8
+ 9
+10
+</code></pre></div>
+
+
+<p>Since I'm just passing my criteria as an anonymous function, I can delete elements based on a more general condition:</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt; filter!(e-&gt;e%2==1, x)
+4-element Array{Int64,1}:
+ 1
+ 3
+ 7
+ 9
+</code></pre></div>
+
+
+<p>And that's it: a simple way to remove either a specific value, or any elements not meeting some condition. Just note that <code>filter!</code> is modifying the original array (as indicated by the exclamation point), not just returning a new array containing a subset of the original. Use <code>filter</code> instead if you don't want to change the original array. </p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
