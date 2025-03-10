@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>Mathematical Curio</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <meta name="description" content="If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will..." />
-</head>
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Mathematical Curio</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will..." />
+        </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Cristina Green</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/projects.html">Projects</a></li>
-                    <li><a href="/category/computer.html">Computer</a></li>
-                    <li class="active"><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/mathematical-curio.html" rel="bookmark"
-           title="Permalink to Mathematical Curio">Mathematical Curio</a></h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
-    </header>
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Cristina Green</a></h1>
+                        <nav><ul>
+                                        <li><a href="/pages/about.html">About</a></li>
+                                        <li><a href="/pages/projects.html">Projects</a></li>
+                                                <li><a href="/category/computer.html">Computer</a></li>
+                                                <li class="active"><a href="/category/math.html">Math</a></li>
+                                                <li><a href="/category/other.html">Other</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/mathematical-curio.html" rel="bookmark"
+             title="Permalink to Mathematical Curio">Mathematical Curio</a></h1>
+      </header>
 
-    <div class="entry-content">
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-01-26T00:00:00-08:00">
                 Published: Mon 26 January 2015
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>.</p>
-
-</footer><!-- /.post-info -->      <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+        
+</footer><!-- /.post-info -->        <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code>number = 12345
 rearranged = 43215
 difference = 43215 - 12345 = 30870
 difference / 9 = 3430
 </code></pre></div>
-
 
 <p>More generally, you can do the same with numbers in any base, and the resulting difference will be divisible by one less than the base.</p>
 <p>For example:</p>
@@ -56,22 +55,17 @@ difference = o43215 - o12345 = o30650 (= 12712 in decimal)
 difference / 7 = 1816 (decimal)
 </code></pre></div>
 
-
 <p>We can prove that this holds generally, not just is specially chosen examples.</p>
-<p>Let <span class="math">\(b\)</span> be the base of the numbers we're considering, and let <span class="math">\(n\)</span> be the number of digits. Then the original number, <span class="math">\(x\)</span>, is defined as
-</p>
-<div class="math">$$ x = \sum_{i=0}^n a_i b^i $$</div>
-<p>
-where <span class="math">\(a_i\)</span> are the digits of <span class="math">\(x\)</span>.</p>
-<p>When we rearrange the digits of <span class="math">\(x\)</span>, let <span class="math">\(j(i)\)</span> denote the new position of the digit originally at position <span class="math">\(i\)</span>. Then the rearranged number, <span class="math">\(y\)</span>, is
-</p>
-<div class="math">$$ y = \sum_{i=0}^n a_i b^{j(i)} $$</div>
+<p>Let $b$ be the base of the numbers we're considering, and let $n$ be the number of digits. Then the original number, $x$, is defined as
+$$ x = \sum_{i=0}^n a_i b^i $$
+where $a_i$ are the digits of $x$.</p>
+<p>When we rearrange the digits of $x$, let $j(i)$ denote the new position of the digit originally at position $i$. Then the rearranged number, $y$, is
+$$ y = \sum_{i=0}^n a_i b^{j(i)} $$</p>
 <p>Then the difference is
-</p>
-<div class="math">$$ x - y = \sum_{i=0}^n a_i [b^i - b^{j(i)}] $$</div>
-<p>Each term in the series is a constant times <span class="math">\(b^n - b^m\)</span> for some <span class="math">\(n &gt; m\)</span>. [Note: if <span class="math">\(i &lt; j(i)\)</span>, then the constant is <span class="math">\(-a_i\)</span>.]</p>
-<div class="math">$$b^n - b^m = b^m(b^{n-m} - 1)$$</div>
-<p>And <span class="math">\(b-1\)</span> is a factor of <span class="math">\(b^N - 1\)</span> for any natural number <span class="math">\(N\)</span>. Thus, <span class="math">\(x-y\)</span> is divisible by <span class="math">\(b-1\)</span>, i.e. one less than the base of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>.</p>
+$$ x - y = \sum_{i=0}^n a_i [b^i - b^{j(i)}] $$</p>
+<p>Each term in the series is a constant times $b^n - b^m$ for some $n &gt; m$. [Note: if $i &lt; j(i)$, then the constant is $-a_i$.]</p>
+<p>$$b^n - b^m = b^m(b^{n-m} - 1)$$</p>
+<p>And $b-1$ is a factor of $b^N - 1$ for any natural number $N$. Thus, $x-y$ is divisible by $b-1$, i.e. one less than the base of $x$ and $y$.</p>
 <h3>Mathematical "Magic"</h3>
 <p>This is the basis of a mathematical magic trick (the origins of which I don't know). In it, the magician gives the following instructions to the audience:</p>
 <ol>
@@ -83,99 +77,29 @@ where <span class="math">\(a_i\)</span> are the digits of <span class="math">\(x
 </ol>
 <p>The magician will then tell the audience what the circled digit is.</p>
 <p>This works because, as we established, the difference will always be divisible by nine. And thus the sum of the digits will also be a multiple of nine. So the magician needs only to sum up the other digits, and subtract it from the next bigger multiple of nine. (This is why it has to be a non-zero digit that is circled: otherwise you wouldn't be able to tell if it was a zero or a nine.)</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
+      </div><!-- /.entry-content -->
 
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
 
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+                                                        <li><a href="https://mathstodon.xyz/@green">Mastodon</a></li>
+                                                        <li><a href="https://bsky.app/profile/cristinagreen.bsky.social">Bluesky</a></li>
+                                                        <li><a href="http://github.com/greenca">Github</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
 
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
 
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
-    </div><!-- /.entry-content -->
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-
-                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
-                            <li><a href="http://github.com/greenca">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-60483897-3', 'auto');
-    ga('send', 'pageview');
-    </script>
-</body>
+        </body>
 </html>

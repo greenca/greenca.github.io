@@ -1,111 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>Regular Expressions with Julia</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <meta name="description" content="I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there..." />
-</head>
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Regular Expressions with Julia</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there..." />
+        </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Cristina Green</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/projects.html">Projects</a></li>
-                    <li class="active"><a href="/category/computer.html">Computer</a></li>
-                    <li><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/regular-expressions-with-julia.html" rel="bookmark"
-           title="Permalink to Regular Expressions with Julia">Regular Expressions with Julia</a></h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
-    </header>
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Cristina Green</a></h1>
+                        <nav><ul>
+                                        <li><a href="/pages/about.html">About</a></li>
+                                        <li><a href="/pages/projects.html">Projects</a></li>
+                                                <li class="active"><a href="/category/computer.html">Computer</a></li>
+                                                <li><a href="/category/math.html">Math</a></li>
+                                                <li><a href="/category/other.html">Other</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/regular-expressions-with-julia.html" rel="bookmark"
+             title="Permalink to Regular Expressions with Julia">Regular Expressions with Julia</a></h1>
+      </header>
 
-    <div class="entry-content">
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-12-07T00:00:00-08:00">
                 Published: Mon 07 December 2020
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>.</p>
-<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->      <p>I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there were a lot of inputs of the form:</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>        
+</footer><!-- /.post-info -->        <p>I had briefly used regular expressions, to check the format of a string, on a previous day. I got into a bit more for today's task, where there were a lot of inputs of the form:</p>
 <div class="highlight"><pre><span></span><code>light orange bags contain 1 dark maroon bag, 3 dim maroon bags, 5 striped green bags, 2 pale aqua bags.
 wavy bronze bags contain 3 pale black bags, 5 bright turquoise bags, 4 pale orange bags.
 dark coral bags contain 3 bright lavender bags, 1 pale bronze bag, 2 dull blue bags.
 dim chartreuse bags contain 2 wavy plum bags, 4 wavy teal bags, 1 dark crimson bag.
 </code></pre></div>
 
-
 <p>I wanted to convert all this text into a dictionary, with the colours of the external bag as the key. I could get the keys just by splitting:</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">colour</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="s">&quot; bags contain &quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">colour</span><span class="p">,</span><span class="w"> </span><span class="n">contents</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; bags contain &quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Now I'm left for a string describing the contents of the bag. This can also be split to get a list of the contents:</p>
-<div class="highlight"><pre><span></span><code><span class="n">split</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="sc">&#39;,&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">split</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;,&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Each item in the list will look something like this:</p>
 <div class="highlight"><pre><span></span><code>1 dark maroon bag
 3 dim maroon bags
 </code></pre></div>
 
-
 <p>I considered splitting the string, and then recombining the two words of the colour, and discarding the bag[s], to get the number and colour of each of the types of contents. But I thought I'd take the opportunity to experiment a bit more with Regular Expressions.</p>
 <p>Julia allows different components of a Regular Expression to be given names, which can then be referenced later. So, in this case:</p>
-<div class="highlight"><pre><span></span><code><span class="n">m</span> <span class="o">=</span> <span class="n">match</span><span class="p">(</span><span class="sr">r&quot;(?&lt;count&gt;\d+) (?&lt;colour&gt;\w+ \w+) bag&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="sr">&quot;(?&lt;count&gt;</span><span class="err">\</span><span class="sr">d+) (?&lt;colour&gt;</span><span class="err">\</span><span class="sr">w+ </span><span class="err">\</span><span class="sr">w+) bag&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Some bags have no other bags inside: in this cases, the Regular Expression is not matched, and m has a value of <code>nothing</code>. Otherwise, the named components can then be accessed as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="nb">nothing</span>
-    <span class="n">colour</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="o">:</span><span class="n">colour</span><span class="p">]</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="o">:</span><span class="n">count</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="ss">:colour</span><span class="p">]</span>
+<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="ss">:count</span><span class="p">])</span>
 <span class="k">end</span>
 </code></pre></div>
-    </div><!-- /.entry-content -->
+      </div><!-- /.entry-content -->
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
 
-                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
-                            <li><a href="http://github.com/greenca">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+                                                        <li><a href="https://mathstodon.xyz/@green">Mastodon</a></li>
+                                                        <li><a href="https://bsky.app/profile/cristinagreen.bsky.social">Bluesky</a></li>
+                                                        <li><a href="http://github.com/greenca">Github</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
 
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-60483897-3', 'auto');
-    ga('send', 'pageview');
-    </script>
-</body>
+        </body>
 </html>

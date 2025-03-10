@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>Cristina Green - C++</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-</head>
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Cristina Green - C++</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+        </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Cristina Green</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/projects.html">Projects</a></li>
-                    <li><a href="/category/computer.html">Computer</a></li>
-                    <li><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Cristina Green</a></h1>
+                        <nav><ul>
+                                        <li><a href="/pages/about.html">About</a></li>
+                                        <li><a href="/pages/projects.html">Projects</a></li>
+                                                <li><a href="/category/computer.html">Computer</a></li>
+                                                <li><a href="/category/math.html">Math</a></li>
+                                                <li><a href="/category/other.html">Other</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/the-sneaky-modulo-operation.html">The Sneaky Modulo Operation</a></h1>
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="/the-sneaky-modulo-operation.html">The Sneaky Modulo Operation</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2015-06-22T00:00:00-07:00">
                 Published: Mon 22 June 2015
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>.</p>
-<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/c.html">C++</a> </p>        
 </footer><!-- /.post-info --><p>Suppose you need to know if a given number is a multiple of, say, 5. There's a simple solution to this problem: the modulo operator. In many languages, it looks like this:</p>
 <div class="highlight"><pre><span></span><code>x % 5
 </code></pre></div>
-
 
 <p>And what it returns is the remainder when dividing x by 5. If that remainder is 0, then x is divisible by 5. Simple.</p>
 <p>But... what if x is a negative number? Or what if instead of 5, you used -5? What is the "remainder" in those situations?</p>
@@ -53,7 +53,6 @@
 -3
 </code></pre></div>
 
-
 <p>But what if we try the same thing in C++?</p>
 <div class="highlight"><pre><span></span><code>&gt;&gt; 13 % 5
 3
@@ -67,7 +66,6 @@
 &gt;&gt; -13 % -5
 -3
 </code></pre></div>
-
 
 <p>This is troubling. What's going on here? </p>
 <p>It turns out that there are three different ways to define the modulo operation, and, depending on which you choose, you get a completely different answer in the cases where any of the arguments are negative. Furthermore, despite the fact that many programming languages use the same symbol to represent the modulo operator, they have defined the operation differently. So an identical calculation can give completely different results, depending on the language it's written in. </p>
@@ -138,35 +136,27 @@
 <p>Python has defined <code>%</code> using Floored Division. It also offers the Truncated Division definition as <code>math.fmod</code>.</p>
 <p>C++ <code>%</code> used to be implementation-defined (which is a pretty bad option, since you can't count on anything), while <code>div</code> was Truncated Division. As of ISO 2011, they are both Truncated Division.</p>
 <p>Some math-focused languages like Matlab and Julia do both: <code>mod</code> is Floored Division and <code>rem</code> is Truncated Division. Another, Maple, is one of the few that has gone with Euclidean Division. </p>
-<p>Luckily, they all match when everything is positive, so you can confidently solve FizzBuzz in any language. But as soon as any negative numbers are a possibility, be very wary...</p>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+<p>Luckily, they all match when everything is positive, so you can confidently solve FizzBuzz in any language. But as soon as any negative numbers are a possibility, be very wary...</p>                    </article>
+                </aside><!-- /#featured -->
+                <section id="extras" class="body">
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
 
-                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
-                            <li><a href="http://github.com/greenca">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+                                                        <li><a href="https://mathstodon.xyz/@green">Mastodon</a></li>
+                                                        <li><a href="https://bsky.app/profile/cristinagreen.bsky.social">Bluesky</a></li>
+                                                        <li><a href="http://github.com/greenca">Github</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
 
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-60483897-3', 'auto');
-    ga('send', 'pageview');
-    </script>
-</body>
+        </body>
 </html>

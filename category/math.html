@@ -1,220 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>Cristina Green - Math</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-</head>
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Cristina Green - Math</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+        </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Cristina Green</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/projects.html">Projects</a></li>
-                    <li><a href="/category/computer.html">Computer</a></li>
-                    <li class="active"><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Cristina Green</a></h1>
+                        <nav><ul>
+                                        <li><a href="/pages/about.html">About</a></li>
+                                        <li><a href="/pages/projects.html">Projects</a></li>
+                                                <li><a href="/category/computer.html">Computer</a></li>
+                                                <li class="active"><a href="/category/math.html">Math</a></li>
+                                                <li><a href="/category/other.html">Other</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html">Chebyshev Collocation for First-Order Systems of Differential Equations</a></h1>
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="/tangents.html">Tangents</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2024-10-01T00:00:00-07:00">
+                Published: Tue 01 October 2024
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+<p>tags: <a href="/tag/p5js.html">p5.js</a> </p>        
+</footer><!-- /.post-info --><p>Today's <a href="https://mathober.com">Mathober</a> theme is Tangents. I wrote a little sketch in p5.js. You can see it <a href="/js/tangents.html">here</a>.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html" rel="bookmark"
+                               title="Permalink to Chebyshev Collocation for First-Order Systems of Differential Equations">Chebyshev Collocation for First-Order Systems of Differential Equations</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-07-31T00:00:00-07:00">
                 Published: Fri 31 July 2015
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>.</p>
-<p>tags: <a href="/tag/numerics.html">numerics</a> </p>
-</footer><!-- /.post-info --><p>Suppose you have a differential equation that you want to solve numerically. An approach you might take is collocation, which is based on the idea that an unknown function <span class="math">\(u(z)\)</span> can be approximated by a sum of <span class="math">\(N+1\)</span> basis functions <span class="math">\(\phi_n(z)\)</span>:
-</p>
-<div class="math">$$ u(z) \approx u_N(z) = \sum_{n=0}^N a_n \phi_n(z) $$</div>
-<p>This approach has the advantage over finite differences that we can guarantee a smooth solution. (Of course, it has the disadvantage that we can't use a non-uniform grid to get more detail in only some areas: since the accuracy of our approximation depends on the number of basis functions we use, we can only add more detail to the entire domain.)</p>
-<p>The function <span class="math">\(u(z)\)</span> is the solution to some differential equation <span class="math">\(Lu = f(z)\)</span>. Substituting the approximation into this equation defines a residual function:
-</p>
-<div class="math">$$ R(z; a_0, a_1, ..., a_N) = Lu_N - f $$</div>
-<p>The residual function is zero for the exact solution. Spectral and pseudospectral methods try to choose the coefficients <span class="math">\(a_n\)</span> to minimize this residual. Collocation chooses these coefficients by requiring the residual function to be zero at selected points.</p>
-<p>Chebyshev Collocation uses Chebyshev Polynomials as the basis functions (hence the name):
-</p>
-<div class="math">$$ \phi_n(z) = T_n(z) $$</div>
-<p>
-where <span class="math">\(z = \cos(\theta)\)</span> and <span class="math">\(T_n(z) \equiv \cos(n\theta)\)</span>.</p>
-<p>Collocation (i.e. residual is set to zero) at the Gauss-Lobatto points:
-</p>
-<div class="math">$$ z_j = \cos\left(\frac{j\pi}{N}\right) $$</div>
-<p>
-These are the extrema of the <span class="math">\(N\)</span>-th Chebyshev polynomial. By requiring the residual function to be zero at these points, we can bound the truncation error of our solution.</p>
-<h1>Boundary Conditions</h1>
-<p>Unlike using a Fourier series to approximate a solution with periodic boundary conditions, Chebyshev polynomials do not automatically satisfy the appropriate boundary conditions. However, explicit constraints can be added:
-</p>
-<div class="math">$$ \sum_{n=0}^N a_n \phi_n(1) = \alpha $$</div>
-<p>
-Inserting this into the algebraic equations produced by our choice of minimization technique for <span class="math">\(R(x; a_0, a_1, ..., a_N)\)</span> causes <span class="math">\(u(1)=\alpha\)</span> to be satisfied by the approximate solution.</p>
-<p>For collocation, we require the differential equation to be satisfied at each of the <span class="math">\(N+1\)</span> gridpoints. The equations for the boundary points can then by replaced with boundary constraints instead. We still have <span class="math">\(N+1\)</span> equations to find the <span class="math">\(N+1\)</span> unknown coefficients: the differential equation satisfied at the <span class="math">\(N-1\)</span> interior points, and two boundary constraints. </p>
-<h1>The Problem</h1>
-<p>If we are solving a second-order differential equation with two boundary conditions, we can easily apply Chebyshev collocation as described above. But, suppose instead, we consider the equivalent first-order system.</p>
-<p>Analytically, the first-order system is equivalent to the second-order differential equation, but when we try to apply Chebyshev collocation, we run into a problem. The number of unknown coefficients and equations at the interior points have now doubled, but we still only have two boundary conditions: basically "half" a boundary condition at each boundary. So we now have <span class="math">\(2N+2\)</span> unknowns, and only <span class="math">\(2N\)</span> equations.</p>
-<h1>Example: Wave Equation</h1>
-<p>Let's look at an example, to demonstrate this issue. (Note that this is only a toy example: there is no reason that you would want to do this with the wave equation, but there are more complicated equations second-order equations that are substantially simpler in first-order system form.)</p>
-<p>Consider the differential equation
-</p>
-<div class="math">$$ u'' = k^2u $$</div>
-<p>
-with boundary conditions <span class="math">\(u(-1) = 0 = u(1)\)</span>. This can be solved analytically for eigenvalues <span class="math">\(k\)</span>:
-</p>
-<div class="math">$$ k = \frac{n\pi}{2} $$</div>
-<p>We can also write this as a first-order system:
-</p>
-<div class="math">$$ \begin{array}{l}
-u' = kv \\
-v' = ku
-\end{array} $$</div>
-<p>
-Or, in vector form,
-</p>
-<div class="math">$$ w' = kAw $$</div>
-<p>
-where
-</p>
-<div class="math">$$ \begin{array}{lcr}w = \left[\begin{array}{c}u\\v\end{array}\right] &amp;\text{ and }&amp; A = \left[\begin{array}{ll}0&amp;1\\1&amp;0\end{array}\right]\end{array}$$</div>
-<h2>Second-Order Equation</h2>
-<p>Let's apply Chebyshev Collocation to our second-order equation. We approximate <span class="math">\(u\)</span> with a series of <span class="math">\(N+1\)</span> Chebyshev polynomials:
-</p>
-<div class="math">$$ u(x) \cong \sum_{n=0}^N a_n T_n(x) $$</div>
-<p>Our differential equation must be satisfied at the Gauss-Lobatto points <span class="math">\(x_j = \cos\left(\frac{j\pi}{N}\right)\)</span>:
-</p>
-<div class="math">$$ \sum_{n=0}^N a_n T''_n(x_j) = k^2 \sum_{n=0}^N a_n T_n(x_j) $$</div>
-<p>This can be written in matrix form, <span class="math">\(Ay = k^2 By\)</span>, where <span class="math">\(y\)</span> is the vector of coefficients <span class="math">\(a_n\)</span>. Each row in matrices <span class="math">\(A\)</span> and <span class="math">\(B\)</span> corresponds to one of the gridpoints <span class="math">\(x_j\)</span>.</p>
-<p>To satisfy the boundary conditions, the rows corresponding to <span class="math">\(x_0\)</span> and <span class="math">\(x_N\)</span> can be replaced by the boundary conditions <span class="math">\(u(\pm 1) = 0\)</span>; that is,
-</p>
-<div class="math">$$ \sum_{n=0}^N a_n T_n(\pm 1) = 0 $$</div>
-<p>
-In matrix form, this is
-</p>
-<div class="math">$$ \left[\begin{array}{ccc}0 &amp;...&amp; 0\end{array}\right] y = k^2 \left[\begin{array}{ccc} T_0(\pm 1) &amp;...&amp; T_N(\pm 1) \end{array} \right] y $$</div>
-<p>
-which can easily be substituted into the appropriate rows of <span class="math">\(A\)</span> and <span class="math">\(B\)</span>.</p>
-<p>The resulting matrix eigenvalue problem can be solved with a standard general eigenvalue algorithm. The numerical results match the analytical solution. </p>
-<h2>First-Order System</h2>
-<p>Like for the second-order equation, we approximate <span class="math">\(w\)</span> with a series of <span class="math">\(N+1\)</span> Chebyshev polynomials:
-</p>
-<div class="math">$$ w(x) \cong \sum_{n=0}^N \left[\begin{array}{c}a_n\\b_n\end{array}\right] T_n(x) $$</div>
-<p>We now have a vector of coefficients for each element in the series, so we have <span class="math">\(2(N+1)\)</span> unknowns, rather than the <span class="math">\(N+1\)</span> unknowns we had in the previous case.</p>
-<p>Again, our differential equation must be satisfied at the Gauss-Lobatto points, <span class="math">\(x_j = \cos\left(\frac{j\pi}{N}\right)\)</span>:
-</p>
-<div class="math">$$ \sum_{n=0}^N \mathbf{c_n} T'_n(x_j) = k A \sum_{n=0}^N \mathbf{c_n} T_n(x_j) $$</div>
-<p>
-where
-</p>
-<div class="math">$$\mathbf{c_n} = \left[\begin{array}{c}a_n\\b_n\end{array}\right]$$</div>
-<p>Again, we can replace two rows by the boundary conditions <span class="math">\(u(\pm 1) = 0\)</span>:
-</p>
-<div class="math">$$ \sum_{n=0}^N a_n T_n(\pm 1) = 0 $$</div>
-<p>
-However, in this case, we have two matrix rows corresponding to each of <span class="math">\(x_0\)</span> and <span class="math">\(x_N\)</span>, but we only have "half" a boundary condition on each boundary, since it is a boundary condition on <span class="math">\(u\)</span> rather than our vector variable <span class="math">\(w\)</span>.</p>
-<p>If we require the differential equation to be satisfied at the interior Gauss-Lobatto points, and add the two "half" boundary conditions, this gives us <span class="math">\(2N\)</span> equations; however, we have <span class="math">\(2N + 2\)</span> unknowns (<span class="math">\(a_n\)</span> and <span class="math">\(b_n\)</span>). </p>
-<p>But clearly our system isn't actually underdetermined, since it's equivalent to the second-order case above. So, what can we try to add two more equations?</p>
-<ol>
-<li>Require the differential equation to be satisfied at one of the boundary points. </li>
-<li>Overspecify the boundary conditions. As <span class="math">\(v'(x) = ku\)</span>, add the additional boundary condition <span class="math">\(v'(\pm 1) = 0\)</span>.</li>
-<li>Consider the two equations separately, rather than as a system. Then, require the equation in <span class="math">\(u'(x)\)</span> to be satisfied at the interior collocation points, and the equation in <span class="math">\(v'(x)\)</span> to be satisfied at all collocation points. The boundary conditions on <span class="math">\(u\)</span> provide the remaining two equations.</li>
-<li>Homogenize the boundary conditions. Rather than having both <span class="math">\(u\)</span> and <span class="math">\(v\)</span> represented as a series of Chebyshev polynomials, define <span class="math">\(u\)</span> in terms of <span class="math">\(\phi_{2n}(x) = T_{2n}(x) - 1\)</span> and <span class="math">\(\phi_{2n+1}(x) = T_{2n+1}(x) - x\)</span> for <span class="math">\(n = 1, 2, ...\)</span>. Using this basis function means that the boundary condition <span class="math">\(u(\pm 1) = 0\)</span> is automatically satisfied, and thus we can just consider the differential equation at all the Gauss-Lobatto points.</li>
-</ol>
-<p>All four methods give approximately the same values for the wavenumber <span class="math">\(k\)</span>. Unfortunately, the values are nowhere near the analytical solution, nor those from solving the second-order equation. </p>
-<p>You might be wondering if this is due to some problem with the first-order system formulation in the first place. Apparently not, since solving the first-order system using a finite-difference method results in the correct solution. </p>
-<p>This suggests that Chebyshev Collocation is just not a suitable technique for solving a first-order system of differential equations numerically. So if you find yourself with such a problem, you'll either need to work with the messier second-order equation, or use some other numerical method. </p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+<p>tags: <a href="/tag/numerics.html">numerics</a> </p>        
+</footer><!-- /.post-info -->                        <p>Suppose you have a differential equation that you want to solve numerically. An approach you might take is collocation, which is based on the idea that an unknown function $u(z)$ can be approximated by a sum of $N+1$ basis functions $\phi_n(z)$:
+$$ u(z) \approx u_N(z) = \sum_ …</p>
+                        <a class="readmore" href="/chebyshev-collocation-for-first-order-systems-of-differential-equations.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/mathematical-curio.html" rel="bookmark"
+                               title="Permalink to Mathematical Curio">Mathematical Curio</a></h1>
+                    </header>
 
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/mathematical-curio.html" rel="bookmark"
-                           title="Permalink to Mathematical Curio">Mathematical Curio</a></h1>
-                </header>
-
-                <div class="entry-content">
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-01-26T00:00:00-08:00">
                 Published: Mon 26 January 2015
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>.</p>
-
-</footer><!-- /.post-info -->                <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>If you take any integer and rearrange the digits however you like, the difference between the original number and the rearranged number will always be divisible by 9.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code>number = 12345
 rearranged = 43215
@@ -222,84 +88,75 @@ difference = 43215 - 12345 = 30870
 difference / 9 = 3430
 </code></pre></div>
 
-
 <p>More generally, you can do the same with numbers …</p>
-                <a class="readmore" href="/mathematical-curio.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+                        <a class="readmore" href="/mathematical-curio.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/simulated-annealing.html" rel="bookmark"
-                           title="Permalink to Simulated Annealing">Simulated Annealing</a></h1>
-                </header>
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/simulated-annealing.html" rel="bookmark"
+                               title="Permalink to Simulated Annealing">Simulated Annealing</a></h1>
+                    </header>
 
-                <div class="entry-content">
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-10-20T00:00:00-07:00">
                 Published: Mon 20 October 2014
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>.</p>
-<p>tags: <a href="/tag/numerics.html">numerics</a> </p>
-</footer><!-- /.post-info -->                <p>My initial approach to the <a href="/tiling-problem.html">tiling problem</a> was to find all the possible configurations, calculate a measure of the distance between same-colour tiles for each, and then select the configuration with the maximum distance. While this does reliably find the optimal solution, it also very quickly becomes infeasible as the …</p>
-                <a class="readmore" href="/simulated-annealing.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+<p>tags: <a href="/tag/numerics.html">numerics</a> </p>        
+</footer><!-- /.post-info -->                        <p>My initial approach to the <a href="/tiling-problem.html">tiling problem</a> was to find all the possible configurations, calculate a measure of the distance between same-colour tiles for each, and then select the configuration with the maximum distance. While this does reliably find the optimal solution, it also very quickly becomes infeasible as the …</p>
+                        <a class="readmore" href="/simulated-annealing.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/tiling-problem.html" rel="bookmark"
-                           title="Permalink to Tiling Problem">Tiling Problem</a></h1>
-                </header>
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/tiling-problem.html" rel="bookmark"
+                               title="Permalink to Tiling Problem">Tiling Problem</a></h1>
+                    </header>
 
-                <div class="entry-content">
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-04-30T00:00:00-07:00">
                 Published: Wed 30 April 2014
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/math.html">Math</a>.</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/math.html">Math</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked …</p>
+                        <a class="readmore" href="/tiling-problem.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
+                <section id="extras" class="body">
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
 
-</footer><!-- /.post-info -->                <p>We have a play-mat: eight rubber tiles, two of each colour, that fit together. We had put it together in a 4x2 arrangement, without considering the colours. The result was ... displeasing. Two pink tiles were right next to each other, but all the other pairs were separated. It just looked …</p>
-                <a class="readmore" href="/tiling-problem.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+                                                        <li><a href="https://mathstodon.xyz/@green">Mastodon</a></li>
+                                                        <li><a href="https://bsky.app/profile/cristinagreen.bsky.social">Bluesky</a></li>
+                                                        <li><a href="http://github.com/greenca">Github</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
 
-                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
-                            <li><a href="http://github.com/greenca">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
 
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-60483897-3', 'auto');
-    ga('send', 'pageview');
-    </script>
-</body>
+        </body>
 </html>

@@ -1,140 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>Advent of Code with Julia</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <meta name="description" content="I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However,..." />
-</head>
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Advent of Code with Julia</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However,..." />
+        </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Cristina Green</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/projects.html">Projects</a></li>
-                    <li class="active"><a href="/category/computer.html">Computer</a></li>
-                    <li><a href="/category/math.html">Math</a></li>
-                    <li><a href="/category/other.html">Other</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/advent-of-code-with-julia.html" rel="bookmark"
-           title="Permalink to Advent of Code with Julia">Advent of Code with Julia</a></h1>
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="_greenca">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
-    </header>
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Cristina Green</a></h1>
+                        <nav><ul>
+                                        <li><a href="/pages/about.html">About</a></li>
+                                        <li><a href="/pages/projects.html">Projects</a></li>
+                                                <li class="active"><a href="/category/computer.html">Computer</a></li>
+                                                <li><a href="/category/math.html">Math</a></li>
+                                                <li><a href="/category/other.html">Other</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/advent-of-code-with-julia.html" rel="bookmark"
+             title="Permalink to Advent of Code with Julia">Advent of Code with Julia</a></h1>
+      </header>
 
-    <div class="entry-content">
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-12-06T00:00:00-08:00">
                 Published: Sun 06 December 2020
         </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/greenca.html">greenca</a>
-        </address>
-<p>In <a href="/category/computer.html">Computer</a>.</p>
-<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>
-</footer><!-- /.post-info -->      <p>I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However, in order to add a bit of challenge, without resorting to racing, this year I'm using a language I don't really know. That's right, it's time for a periodic return to my Attempt to Learn Julia!</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/greenca.html">greenca</a>
+                </address>
+        <p>In <a href="/category/computer.html">Computer</a>.</p>
+<p>tags: <a href="/tag/advent-of-code.html">advent of code</a> <a href="/tag/julia.html">julia</a> </p>        
+</footer><!-- /.post-info -->        <p>I enjoy Advent of Code every year. I like the small daily puzzles, and I certainly wouldn't want anything long and complicated every day. However, in order to add a bit of challenge, without resorting to racing, this year I'm using a language I don't really know. That's right, it's time for a periodic return to my Attempt to Learn Julia!</p>
 <p>I've gotten a bit further than my last attempt. However, as with then, the tutorials/documentation are still not all that I'd hope. (I notice that they have many videos; however, when I'm trying to find the syntax for something, I don't want to watch a whole video hoping they'll mention it.) So here's a cheatsheet of some basic things I've figured out so far.</p>
 <h1>Loading data from a file</h1>
 <p>To read the whole file, as one long string:</p>
-<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">f</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">f</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div>
-
 
 <p>To read the file line by line:</p>
-<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">f</span>
-    <span class="k">for</span> <span class="n">ln</span> <span class="kp">in</span> <span class="n">eachline</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="o">...</span>
-    <span class="k">end</span>
+<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">f</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ln</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachline</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="w">        </span><span class="o">...</span>
+<span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 
-
 <p>Once you've read that data, you might want to split it appart into a list:</p>
-<div class="highlight"><pre><span></span><code><span class="n">mylist</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>       <span class="c"># Defaults to splitting on whitespace</span>
-<span class="n">mylist</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="sc">&#39;,&#39;</span><span class="p">)</span>  <span class="c"># Or, provide a delimiter</span>
+<div class="highlight"><pre><span></span><code><span class="n">mylist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span><span class="w">       </span><span class="c"># Defaults to splitting on whitespace</span>
+<span class="n">mylist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;,&#39;</span><span class="p">)</span><span class="w">  </span><span class="c"># Or, provide a delimiter</span>
 </code></pre></div>
-
 
 <p>If you had numbers in that data file of yours, you'll probably want to convert them from strings into numbers:</p>
-<div class="highlight"><pre><span></span><code><span class="n">intval</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">stringval</span><span class="p">)</span>
-<span class="n">floatval</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">stringval</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">intval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">stringval</span><span class="p">)</span>
+<span class="n">floatval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">stringval</span><span class="p">)</span>
 </code></pre></div>
-
 
 <h1>Searching in your string or array</h1>
 <p>Now that you have your data loaded, maybe you'll want to find a particular value. To check if a value is in your array (or a character in your string):</p>
-<div class="highlight"><pre><span></span><code><span class="n">val</span> <span class="kp">in</span> <span class="n">myarray</span>
+<div class="highlight"><pre><span></span><code><span class="n">val</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">myarray</span>
 </code></pre></div>
-
 
 <p>If you want to know where is the array your value is, you can use <code>findfirst</code> and <code>findnext</code>. Note that these will both return <code>nothing</code> if you search value is not in the array, and <code>nothing</code> cannot be used as a boolean, so if you want to go through all the occurences of your value, you'll need to check for it:</p>
-<div class="highlight"><pre><span></span><code><span class="n">index</span> <span class="o">=</span> <span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">myarray</span><span class="p">)</span>
-<span class="k">while</span> <span class="n">index</span> <span class="o">!=</span> <span class="nb">nothing</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">findnext</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">myarray</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span><span class="w"> </span><span class="n">myarray</span><span class="p">)</span>
+<span class="k">while</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="w">    </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findnext</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="n">val</span><span class="p">),</span><span class="w"> </span><span class="n">myarray</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div>
-
 
 <p>These can be used with other conditions in place of <code>isequal</code>, including user defined predicates.</p>
 <h1>Regular Expressions</h1>
 <p>There are various tutorials online for using Regular Expressions in Julia, but they are mostly incorrect. It looks like the methods changed name at some point, so the examples in the tutorial no longer work. For version 1.5.3, you can find if a regular expression matches on your string with <code>occursin</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">occursin</span><span class="p">(</span><span class="sr">r&quot;abc&quot;</span><span class="p">,</span> <span class="s">&quot;abcdefg&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">occursin</span><span class="p">(</span><span class="sa">r</span><span class="sr">&quot;abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;abcdefg&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <h1>Substitions</h1>
 <p>Substitions can be done with <code>replace</code> on arrays and strings, with a slight variation between the two. For arrays:</p>
-<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">1</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">=&gt;</span><span class="mi">20</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>For strings, the same format applies, but only one substition can be done. You can apply multiple rules by nesting calls to <code>replace</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">(</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;abcdef&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="o">=&gt;</span><span class="s">&quot;x&quot;</span><span class="p">),</span> <span class="s">&quot;b&quot;</span><span class="o">=&gt;</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">replace</span><span class="p">(</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;abcdef&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="o">=&gt;</span><span class="s">&quot;x&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="o">=&gt;</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>However, for strings, <code>replace</code> can also be used with regular expression, which would allow more complicated substitutions, such as reordering substrings. </p>
-    </div><!-- /.entry-content -->
+      </div><!-- /.entry-content -->
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
 
-                            <li><a href="http://twitter.com/_greenca">Twitter</a></li>
-                            <li><a href="http://github.com/greenca">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+                                                        <li><a href="https://mathstodon.xyz/@green">Mastodon</a></li>
+                                                        <li><a href="https://bsky.app/profile/cristinagreen.bsky.social">Bluesky</a></li>
+                                                        <li><a href="http://github.com/greenca">Github</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
 
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-60483897-3', 'auto');
-    ga('send', 'pageview');
-    </script>
-</body>
+        </body>
 </html>
